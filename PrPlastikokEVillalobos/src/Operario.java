@@ -68,6 +68,8 @@ public class Operario {
 	 * 
 	 */
 	public void repararMaquina() {
+		// TODO @eli: agregar toda la logica para reparar la maquina.
+		
 		// Una vez finalizada la reparacion, se debe incrementar en uno
 		// el total de maquinas reparadas.
 		incrementarCantReparaciones();
