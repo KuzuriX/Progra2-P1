@@ -1,16 +1,14 @@
-import java.sql.Date;
-import java.sql.Time;
+import java.text.SimpleDateFormat;
 
 /**
- * Solicitud de reparacion
+ * Solicitud de reparación
  * @author Elizabeth Villalobos
  */
 public class Solicitud {
 	// Puede ser uno de tres estados: pendiente, despachada o atendida.
 	private String condicionAtencion;
 	private String idMaquina;
-	private Date fechaAveria;
-	private Time horaAveria;
+	private SimpleDateFormat fechaHoraAveria;
 	private int numEnvasesProducidos;
 	private char tamano;
 	private int grosor;
@@ -20,15 +18,20 @@ public class Solicitud {
 	
 	/**
 	 * Solicitud
-	 * Constructor. Crear una solicitud de reparacion.
-	 * 
+	 * Constructor. Crear una solicitud de reparación.	
+	 * @param pidMaquina		identificador de la máquina averiada.
+	 * @param pfechaHoraAveria  fecha y hora en que se produjo la avería.
+	 * @param pcantEnvases		cantidad de envases producidos desde la última 
+	 * 							activación.
+	 * @param ptamano			tamaño del envase que produce la máquina.
+	 * @param pgrosor			grosor del envase que produce la máquina.
+	 * @param pproblema			problema que se presentó en la máquina.
 	 */
-	public Solicitud(String pidMaquina, Date pfechaAveria, Time phoraAveria, int pcantEnvases, char ptamano, int pgrosor, String pproblema) {
+	public Solicitud(String pidMaquina, SimpleDateFormat pfechaHoraAveria, int pcantEnvases, char ptamano, int pgrosor, String pproblema) {
 		// Cuando se crea una solicitud siempre tiene estado "pendiente".
-		setCondicionAtencion("pendiente");
+		setCondicionAtencion(Constantes.SOLICITUD_CONDICION_PENDIENTE);
 		setIdMaquina(pidMaquina);
-		setFechaAveria(pfechaAveria);
-		setHoraAveria(phoraAveria);
+		setFechaHoraAveria(pfechaHoraAveria);
 		setNumEnvasesProducidos(pcantEnvases);
 		setTamano(ptamano);
 		setGrosor(pgrosor);
@@ -73,38 +76,20 @@ public class Solicitud {
 	
 	/**
 	 * getFechaAveria
-	 * Retorna la fecha en que se presento la averia.
-	 * @return Date fecha de la averia.
+	 * Retorna la fecha y hora en que se presento la averia.
+	 * @return SimpleDateFormat fecha y hora de la averia.
 	 */
-	private Date getFechaAveria() {
-		return fechaAveria;
+	private SimpleDateFormat getFechaHoraAveria() {
+		return fechaHoraAveria;
 	}
 	
 	/**
 	 * setFechaAveria
-	 * Establece un valor para la fecha de la averia.
-	 * @param Date fecha en que se presento la averia.
+	 * Establece un valor para la fecha y hora en que se produjo la averia.
+	 * @param SimpleDateFormat fecha y hora de la averia.
 	 */
-	private void setFechaAveria(Date pfechaAveria) {
-		fechaAveria = pfechaAveria;
-	}
-	
-	/**
-	 * getHoraAveria
-	 * Retorna la hora en que se presento la averia.
-	 * @return Time hora de la averia.
-	 */
-	private Time getHoraAveria() {
-		return horaAveria;
-	}
-	
-	/**
-	 * setHoraAveria
-	 * Establece un valor para la hora de la averia
-	 * @param Time hora en que se presento la averia.
-	 */
-	private void setHoraAveria(Time phoraAveria) {
-		horaAveria = phoraAveria;
+	private void setFechaHoraAveria(SimpleDateFormat pfechaHoraAveria) {
+		fechaHoraAveria = pfechaHoraAveria;
 	}
 	
 	/**
@@ -230,7 +215,7 @@ public class Solicitud {
 		String estado = "";
 		estado += "Condicion: " + getCondicionAtencion() + "\n" +
 				  "Maquina averiada: " + getIdMaquina() + "\n" + 
-				  "Fecha y hora de la averia: " + getFechaAveria() + " " + getHoraAveria() + "\n" +
+				  "Fecha y hora de la averia: " + getFechaHoraAveria() + "\n" +
 				  "Cantidad de envases producidos: " + getNumEnvasesProducidos() + "\n" + 
 				  "Tamaño: " + getTamano() + "\n" + 
 				  "Grosor: " + getGrosor() + "\n" +

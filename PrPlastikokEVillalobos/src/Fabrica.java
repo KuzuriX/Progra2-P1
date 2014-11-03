@@ -23,7 +23,7 @@ public class Fabrica {
 	 * Retorna la referencia al centro de control que administra.
 	 * @return CentroControl referencia al centro de control.
 	 */
-	public CentroControl getCentroControl(){
+	private CentroControl getCentroControl(){
 		return objCentroControl;
 	}
 	
