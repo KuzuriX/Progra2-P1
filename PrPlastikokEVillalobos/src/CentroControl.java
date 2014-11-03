@@ -55,6 +55,21 @@ public class CentroControl {
 	}
 	
 	/**
+	 * listarOperarios
+	 * Lista los operarios que tiene el centro de control.
+	 * @return String texto que contiene la informacion de los operarios
+	 * 				  del centro de control.
+	 */
+	private String listarOperarios() {
+		String lista = "";
+		
+		for (Operario objOperario: listaOperarios) {
+			lista += objOperario.toString();
+		}
+		return lista;
+	}
+	
+	/**
 	 * despacharSolicitud
 	 * Despacha una solicitud de reparacion a un operario. Si hay mas de un
 	 * operario es necesario determinar cual tiene menos solicitudes asignadas.
@@ -131,6 +146,20 @@ public class CentroControl {
 	}
 	
 	/**
+	 * listarSolicitudesAtendidas
+	 * Retorna la lista de las solicitudes atendidas por el centro de control.
+	 * @return String lista de solicitudes atendidas.
+	 */
+	private String listarSolicitudesAtendidas() {
+		String lista = "";
+		
+		for (Solicitud objSolicitud: solicitudesAtendidas) {
+			lista += objSolicitud.toString();
+		}
+		return lista;
+	}
+	
+	/**
 	 * listarSolicDespachadasOperario
 	 * Retorna la lista de las solicitudes despachadas a el operario pasado
 	 * por parametro.
@@ -190,5 +219,19 @@ public class CentroControl {
 	 */
 	public Maquina obtenerMaquina(String pidMaquina) {
 		return fabrica.obtenerMaquina(pidMaquina);
+	}
+	
+	/**
+	 * toString
+	 * Retorna el estado del centro de control.
+	 * @return String estado de los atributos del centro de control.
+	 */
+	public String toString() {
+		String estado = "Centro de Control \n" +
+						"Operarios: \n" + listarOperarios() + "\n" + 
+						"Solicitudes Despachadas: \n" + listarSolicitudes() + "\n" + 
+						"Solicitudes Atendidas: \n" + listarSolicitudesAtendidas();
+		
+		return estado;
 	}
 }
