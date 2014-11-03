@@ -111,7 +111,7 @@ public class Operario {
 				psolicitud.setSolucion(Constantes.FALLA_MATERIA_PRIMA_SOLUCION);
 			}
 			// Activar la maquina para que vuelva a funcionamiento.
-			maqAReparar.activar();
+			maqAReparar.activarMaquina();
 			// Solicitar al Centro de Control que mueva la solicitud de la lista
 			// de despachadas a atendidas.
 			centroControl.moverSolicitudAtendida(psolicitud);

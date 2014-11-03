@@ -289,20 +289,50 @@ public class Maquina {
 	}
 	
 	/**
-	 * activar
+	 * activarMaquina
 	 * Activa la máquina para entrar en producción.
 	 */
-	public void activar() {
+	public void activarMaquina() {
 		// Cuando se activa la máquina se debe resetear el contador de envases.
 		setNumEnvases(0);
 		setActivo(true);
 	}
 	
 	/**
-	 * desactivar
+	 * desactivarMaquina
 	 * Desactiva la máquina.
 	 */
-	public void desactivar() {
+	public void desactivarMaquina() {
 		setActivo(false);
+	}
+	
+	/**
+	 * iniciarProduccion
+	 * Iniciar la produccion de envases.
+	 */
+	public void iniciarProduccion() {
+		// TODO: agregar la logica de producir envases.
+	}
+	
+	/**
+	 * detenerProduccion
+	 * Detiene la produccion de envases.
+	 */
+	public void detenerProduccion() {
+		// TODO: agregar la logica de detener la produccion de envases.
+	}
+	
+	/**
+	 * verificarFalla
+	 * Verifica fallas en la máquina y en caso positivo se comunica con el centro
+	 * de control para solicitar una reparación.
+	 */
+	private void verificarFalla() {
+		// TODO: Verificar que la configuración del envase a producir sea correcta.
+		
+		
+		// TODO: Verificar que la cantidad de materia prima sea suficiente para
+		// producir envases.
+		
 	}
 }
