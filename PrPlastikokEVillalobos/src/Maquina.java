@@ -13,6 +13,7 @@ public class Maquina {
 	private boolean enMarcha;
 	private int cantEnvasesProd = 0;
 	private Molde moldeEnvases;
+	private int numEnvases; 
 	
 	
 	public Maquina(CentroControl pobjCentroControl, int pcontadorMaquinas){
@@ -34,10 +35,10 @@ public class Maquina {
 		id = "MQ-"+pcontadorMaquinas;
 	}
 	
-	public void establecerParametros(boolean pmodoOp, int pcantEnvases, char ptamannoEnvases, int pgrosorEnvases){
+	public void establecerParametros(boolean pmodoOp, int pnumEnvases, char ptamannoEnvases, int pgrosorEnvases){
 		
 		setModoOperacion(pmodoOp);
-		setCantEnvasesProd(pcantEnvases);
+		setNumEnvases(pnumEnvases);
 		setMolde(ptamannoEnvases, pgrosorEnvases);
 		
 	}
@@ -117,6 +118,14 @@ public class Maquina {
 	
 	public boolean getEnmarcha(){
 		return enMarcha;
+	}
+	
+	public void setNumEnvases(int pnumEnvases) {
+		numEnvases = pnumEnvases;
+	}
+	
+	public int getNumEnvases() {
+		return numEnvases;
 	}
 
 }

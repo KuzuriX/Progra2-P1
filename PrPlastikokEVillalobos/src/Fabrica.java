@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class Fabrica {
 	private ArrayList<Maquina> listaMaquinas = new ArrayList<>();
 	private CentroControl objCentroControl;
@@ -31,10 +30,9 @@ public class Fabrica {
 		setMaquina(objCentroControl);
 	}
 	
-	public void establecerParametros(int pindice, boolean pmodoOp, int cantEnvases, char tamanannoENvases, int grosorEnvases){
-		listaMaquinas<pindice-1>.establecerParametros(pmodoOp, cantEnvases, tamanannoENvases, grosorEnvases); 
+	public void establecerParametrosMaq(int pindice, boolean pmodoOp, int pnumEnvases, char tamanannoENvases, int grosorEnvases){
+		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases, tamanannoENvases, grosorEnvases); 
 	}
-	
-	
+		
 
 }
