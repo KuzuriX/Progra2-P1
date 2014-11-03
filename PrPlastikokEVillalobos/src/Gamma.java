@@ -1,12 +1,11 @@
 
-public class Gamma extends Maquina{
-
+public class Gamma extends Maquina {
 	private boolean modoGamma;
 	private double consumoGamma;
 	private final static double CANT_MATERIA_MODO_GAMMA = 12.0;
 	
-	public Gamma(CentroControl pobjCentroControl){
-		super(pobjCentroControl);
+	public Gamma(CentroControl pobjCentroControl, String pmarca, String pmodelo, String pannoFabricacion){
+		super(pobjCentroControl, pmarca, pmodelo,pannoFabricacion);
 		setModoGamma(false);
 		setConsumoGamma(0.06);
 	}
@@ -53,9 +52,8 @@ public class Gamma extends Maquina{
 	 * Iniciar la produccion de envases.
 	 * Redefinido de la clase maquina a partir de la nueva maquina Gamma
 	 */
-	public void iniciarProduccion() {
-
-		
+	@Override
+	public String iniciarProduccion() {
 		double materiaPrima = getCantMateriaPrima();
 		String averia = "";
 		
@@ -101,7 +99,7 @@ public class Gamma extends Maquina{
 				
 			}
 		}
-		
+		return averia;
 	}
 	
 	/**
@@ -117,7 +115,4 @@ public class Gamma extends Maquina{
 		
 		return getModoGamma();
 	}
-	
-	
-	
 }

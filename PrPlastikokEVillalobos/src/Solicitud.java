@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
  * @author Elizabeth Villalobos
  */
 public class Solicitud {
+	private static int contadorSolicitudes;
+	private String id;
 	// Puede ser uno de tres estados: pendiente, despachada o atendida.
 	private String condicionAtencion;
 	private String idMaquina;
@@ -28,6 +30,7 @@ public class Solicitud {
 	 * @param pproblema			problema que se presentó en la máquina.
 	 */
 	public Solicitud(String pidMaquina, SimpleDateFormat pfechaHoraAveria, int pcantEnvases, char ptamano, int pgrosor, String pproblema) {
+		setId();
 		// Cuando se crea una solicitud siempre tiene estado "pendiente".
 		setCondicionAtencion(Constantes.SOLICITUD_CONDICION_PENDIENTE);
 		setIdMaquina(pidMaquina);
@@ -36,6 +39,24 @@ public class Solicitud {
 		setTamano(ptamano);
 		setGrosor(pgrosor);
 		setProblema(pproblema);
+	}
+	
+	/**
+	 * getId
+	 * Retorna el valor del atributo id.
+	 * @return String identificador de la solicitud.
+	 */
+	public String getId() {
+		return condicionAtencion;
+	}
+	
+	/**
+	 * setId
+	 * Establece un valor para el identificador de la solicitud.
+	 */
+	public void setId() {
+		contadorSolicitudes++;
+		id = "Solicitud-" + contadorSolicitudes;
 	}
 	
 	/**

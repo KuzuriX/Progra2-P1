@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Maquina
- * @author Miguel García
+ * @author Miguel Garcia
  */
 public class Maquina {
 	private static int contadorMaquinas = 0;
@@ -32,16 +32,15 @@ public class Maquina {
 	 * @param pobjCentroControl Centro de control al que la maquina debe reportar
 	 * 						    averias.
 	 */
-	public Maquina(CentroControl pobjCentroControl){
+	public Maquina(CentroControl pobjCentroControl, String pmarca, String pmodelo, String pannoFabricacion){
 		setCentroControl(pobjCentroControl);
 		setId();
-		setMarca("Plamasa");
-		setModelo("PL-1234");
-		setAnnoFabricacion("2014");
-		setModoOperacion('C');
-		setCantMateriaPrima(0);
+		setMarca(pmarca);
+		setModelo(pmodelo);
+		setAnnoFabricacion(pannoFabricacion);
 		crearMolde();
 		crearDetector(this);
+		
 	}
 	
 	/**
@@ -65,8 +64,8 @@ public class Maquina {
 	/**
 	 * setCentroControl
 	 * Establece una referencia al centro de control con el cual se 
-	 * comunicará la máquina en caso de averías.
-	 * @param pobjCentroControl Centro de control de averías.
+	 * comunicarÃ¡ la mÃ¡quina en caso de averÃ­as.
+	 * @param pobjCentroControl Centro de control de averÃ­as.
 	 */
 	private void setCentroControl(CentroControl pobjCentroControl){
 		objCentroControl = pobjCentroControl;
@@ -74,7 +73,7 @@ public class Maquina {
 	
 	/**
 	 * crearMolde
-	 * Crea un molde por defecto. El molde por defecto será de tamaño "P" y
+	 * Crea un molde por defecto. El molde por defecto serÃ¡ de tamaÃ±o "P" y
 	 * con grosor de 1.
 	 */
 	private void crearMolde() {
@@ -95,12 +94,12 @@ public class Maquina {
 	
 	/**
 	 * establecerParametros
-	 * Pone a disposición del cliente un servicio que le permita cambiar los
-	 * parámetros con que va a funcionar la máquina.
-	 * @param pmodoOp			Modo de operación. True indica modo de operación continuo.
+	 * Pone a disposiciÃ³n del cliente un servicio que le permita cambiar los
+	 * parÃ¡metros con que va a funcionar la mÃ¡quina.
+	 * @param pmodoOp			Modo de operaciÃ³n. True indica modo de operaciÃ³n continuo.
 	 * 				   			False, indica modo a intervalos.
-	 * @param pnumEnvases		Número de envases a producir por intervalo.
-	 * @param ptamannoEnvases	Tamaño de los envases a producir.
+	 * @param pnumEnvases		NÃºmero de envases a producir por intervalo.
+	 * @param ptamannoEnvases	TamaÃ±o de los envases a producir.
 	 * @param pgrosorEnvases 	Grosor de los envases a producir.
 	 */
 	public void establecerParametros(char pmodoOp, int pnumEnvases, char ptamannoEnvases, int pgrosorEnvases){
@@ -111,8 +110,8 @@ public class Maquina {
 	
 	/**
 	 * getModoOperacion
-	 * Retorna el modo de operación en que opera la máquina.
-	 * @return boolean Modo de operación. True indica modo de operación continuo.
+	 * Retorna el modo de operaciÃ³n en que opera la mÃ¡quina.
+	 * @return boolean Modo de operaciÃ³n. True indica modo de operaciÃ³n continuo.
 	 * 				   False, indica modo a intervalos.
 	 */
 	public char getModoOperacion(){
@@ -121,10 +120,10 @@ public class Maquina {
 	
 	/**
 	 * setModoOperacion
-	 * Establece un modo de operación para la máquina. Si el parámetro es true,
-	 * el modo de operación será continuo. Si es false, entonces el modo será
+	 * Establece un modo de operaciÃ³n para la mÃ¡quina. Si el parÃ¡metro es true,
+	 * el modo de operaciÃ³n serÃ¡ continuo. Si es false, entonces el modo serÃ¡
 	 * a intervalos.
-	 * @param pmodOper Modo de operación de la máquina.
+	 * @param pmodOper Modo de operaciÃ³n de la mÃ¡quina.
 	 */
 	private void setModoOperacion(char pmodOper){
 		modoOperacion = pmodOper;
@@ -132,7 +131,7 @@ public class Maquina {
 	
 	/**
 	 * getCantEnvasesProd
-	 * Retorna la cantidad de envases producidos por la máquina.
+	 * Retorna la cantidad de envases producidos por la mÃ¡quina.
 	 * @return int cantidad de envases.
 	 */
 	public int getCantEnvasesProd() {
@@ -141,7 +140,7 @@ public class Maquina {
 	
 	/**
 	 * incrementarCantEnvasesProd
-	 * Incrementa en uno la cantidad de envases producidos por la máquina.
+	 * Incrementa en uno la cantidad de envases producidos por la mÃ¡quina.
 	 */
 	protected void incrementarCantEnvasesProd() {
 		cantEnvasesProd ++;
@@ -149,8 +148,8 @@ public class Maquina {
 	
 	/**
 	 * setMolde
-	 * Establece las características del envase que va a producir la máquina.
-	 * @param ptamannoEnvases	Tamaño del envase puede ser: "P", "M" o "G".
+	 * Establece las caracterÃ­sticas del envase que va a producir la mÃ¡quina.
+	 * @param ptamannoEnvases	TamaÃ±o del envase puede ser: "P", "M" o "G".
 	 * @param pgrosorEnvases	Grosor del envase a producir.
 	 */
 	private void setMolde(char ptamannoEnvases, int pgrosorEnvases){
@@ -160,8 +159,8 @@ public class Maquina {
 	
 	/**
 	 * getMarca
-	 * Retorna la marca de la máquina.
-	 * @return String marca de la máquina.
+	 * Retorna la marca de la mÃ¡quina.
+	 * @return String marca de la mÃ¡quina.
 	 */
 	public String getMarca() {
 		return marca;
@@ -169,8 +168,8 @@ public class Maquina {
 	
 	/**
 	 * setMarca
-	 * Establece la marca de la máquina.
-	 * @param pmarca marca de la máquina.
+	 * Establece la marca de la mÃ¡quina.
+	 * @param pmarca marca de la mÃ¡quina.
 	 */
 	private void setMarca(String pmarca) {
 		marca = pmarca;
@@ -178,8 +177,8 @@ public class Maquina {
 	
 	/**
 	 * getModelo
-	 * Retorna el modelo de la máquina.
-	 * @return String modelo de la máquina.
+	 * Retorna el modelo de la mÃ¡quina.
+	 * @return String modelo de la mÃ¡quina.
 	 */
 	public String getModelo() {
 		return modelo;
@@ -187,8 +186,8 @@ public class Maquina {
 	
 	/**
 	 * setModelo
-	 * Establece el valor para el modelo de la máquina. 
-	 * @param pmodelo modelo de la máquina.
+	 * Establece el valor para el modelo de la mÃ¡quina. 
+	 * @param pmodelo modelo de la mÃ¡quina.
 	 */
 	private void setModelo(String pmodelo) {
 		modelo = pmodelo;
@@ -196,8 +195,8 @@ public class Maquina {
 	
 	/**
 	 * getAnnoFabricacion
-	 * Retorna el año en que se fabricó la máquina.
-	 * @return String Año de fabricación.
+	 * Retorna el aÃ±o en que se fabricÃ³ la mÃ¡quina.
+	 * @return String AÃ±o de fabricaciÃ³n.
 	 */
 	public String getAnnoFabricacion() {
 		return annoFabricacion;
@@ -205,8 +204,8 @@ public class Maquina {
 	
 	/**
 	 * setAnnoFabricacion
-	 * Establece el año de fabricación de la máquina.
-	 * @param pannoFabricacion año de fabricación.
+	 * Establece el aÃ±o de fabricaciÃ³n de la mÃ¡quina.
+	 * @param pannoFabricacion aÃ±o de fabricaciÃ³n.
 	 */
 	public void setAnnoFabricacion(String pannoFabricacion) {
 		annoFabricacion = pannoFabricacion;
@@ -224,8 +223,8 @@ public class Maquina {
 	/**
 	 * setCantMateriaPrima
 	 * Establece un valor para la cantidad de materia.
-	 * @param pcantMateriaPrima cantidad de materia que tendrá disponible
-	 * 							la máquina.
+	 * @param pcantMateriaPrima cantidad de materia que tendrÃ¡ disponible
+	 * 							la mÃ¡quina.
 	 */
 	public void setCantMateriaPrima(double pcantMateriaPrima) {
 		cantMateriaPrima = pcantMateriaPrima;
@@ -234,7 +233,7 @@ public class Maquina {
 	/**
 	 * isActivo
 	 * Retorna el valor del atributo activo.
-	 * @return boolean indica true o false si la máquina está activa o no.
+	 * @return boolean indica true o false si la mÃ¡quina estÃ¡ activa o no.
 	 */
 	protected boolean isActivo() {
 		return activo;
@@ -242,8 +241,8 @@ public class Maquina {
 	
 	/**
 	 * setActivo
-	 * Establece si la máquina está activa o no.
-	 * @param pactivo valor booleano que indica si la máquina está activa o no.
+	 * Establece si la mÃ¡quina estÃ¡ activa o no.
+	 * @param pactivo valor booleano que indica si la mÃ¡quina estÃ¡ activa o no.
 	 */
 	private void setActivo(boolean pactivo) {
 		activo = pactivo;
@@ -251,8 +250,8 @@ public class Maquina {
 	
 	/**
 	 * getCondicion
-	 * Retorna la condición de la máquina.
-	 * @return int indica la condición de la máquina.
+	 * Retorna la condiciÃ³n de la mÃ¡quina.
+	 * @return int indica la condiciÃ³n de la mÃ¡quina.
 	 */
 	public int getCondicion() {
 		return condicion;
@@ -260,8 +259,8 @@ public class Maquina {
 	
 	/**
 	 * setCondicion
-	 * Establece un valor para la condición de la máquina.
-	 * @param pcondicion indica la condición en que se encuentra la máquina.
+	 * Establece un valor para la condiciÃ³n de la mÃ¡quina.
+	 * @param pcondicion indica la condiciÃ³n en que se encuentra la mÃ¡quina.
 	 */
 	private void setCondicion(int pcondicion) {
 		condicion = pcondicion;
@@ -269,8 +268,8 @@ public class Maquina {
 	
 	/**
 	 * getEnMarcha
-	 * Retorna true o false si la máquina se encuentra en marcha.
-	 * @return boolean indica si la máquina se encuentra en marcha.
+	 * Retorna true o false si la mÃ¡quina se encuentra en marcha.
+	 * @return boolean indica si la mÃ¡quina se encuentra en marcha.
 	 */
 	public boolean getEnMarcha(){
 		return enMarcha;
@@ -278,8 +277,8 @@ public class Maquina {
 	
 	/**
 	 * setEnMarcha
-	 * Establece si la máquina se encuentra en marcha o no.
-	 * @param penMarcha booleano que indica si la máquina se encuentra en
+	 * Establece si la mÃ¡quina se encuentra en marcha o no.
+	 * @param penMarcha booleano que indica si la mÃ¡quina se encuentra en
 	 * 					marcha o no.
 	 */
 	public void setEnMarcha(boolean penMarcha) {
@@ -297,9 +296,9 @@ public class Maquina {
 	
 	/**
 	 * getNumEnvases
-	 * Retorna el número de envases que ha producido la máquina desde la
-	 * última activación.
-	 * @return int cantidad de envases producidos desde la última activación.
+	 * Retorna el nÃºmero de envases que ha producido la mÃ¡quina desde la
+	 * Ãºltima activaciÃ³n.
+	 * @return int cantidad de envases producidos desde la Ãºltima activaciÃ³n.
 	 */
 	public int getNumEnvases() {
 		return numEnvases;
@@ -307,8 +306,8 @@ public class Maquina {
 	
 	/**
 	 * setNumEnvases
-	 * Establece un valor para el número de envases producidos por la máquina.
-	 * @param pnumEnvases número de envases producidos.
+	 * Establece un valor para el nÃºmero de envases producidos por la mÃ¡quina.
+	 * @param pnumEnvases nÃºmero de envases producidos.
 	 */
 	public void setNumEnvases(int pnumEnvases) {
 		numEnvases = pnumEnvases;
@@ -316,7 +315,7 @@ public class Maquina {
 
 	/**
 	 * cargarMateriaPrima
-	 * Carga al 100% la materia prima de la máquina.
+	 * Carga al 100% la materia prima de la mÃ¡quina.
 	 */
 	public void cargarMateriaPrima() {
 		setCantMateriaPrima(100);
@@ -324,17 +323,17 @@ public class Maquina {
 	
 	/**
 	 * activarMaquina
-	 * Activa la máquina para entrar en producción.
+	 * Activa la mÃ¡quina para entrar en producciÃ³n.
 	 */
 	public void activarMaquina() {
-		// Cuando se activa la máquina se debe resetear el contador de envases.
+		// Cuando se activa la mÃ¡quina se debe resetear el contador de envases.
 		setNumEnvases(0);
 		setActivo(true);
 	}
 	
 	/**
 	 * desactivarMaquina
-	 * Desactiva la máquina.
+	 * Desactiva la mÃ¡quina.
 	 */
 	public void desactivarMaquina() {
 		setActivo(false);
@@ -344,7 +343,7 @@ public class Maquina {
 	 * iniciarProduccion
 	 * Iniciar la produccion de envases.
 	 */
-	public void iniciarProduccion() {
+	public String iniciarProduccion() {	
 		double materiaPrima = getCantMateriaPrima();
 		String averia = "";
 		
@@ -380,6 +379,10 @@ public class Maquina {
 				
 			}
 		}
+		String msj = "Se produjeron "+getCantEnvasesProd()+" envaes \n";
+		msj += "Quedan "+getCantMateriaPrima()+" de materia prima";
+		
+		return msj;
 		
 	}
 	
@@ -394,15 +397,12 @@ public class Maquina {
 		double materiaPrima = getCantMateriaPrima();
 		String averia = "";
 		
-		System.out.println("Produciendo envases...");
 		while (getCantMateriaPrima() > 0 && isActivo()) {
 			materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
 			setCantMateriaPrima(materiaPrima);
 			
 			// Se ha producido un envase mas.
 			incrementarCantEnvasesProd();
-			
-			System.out.println(getCantEnvasesProd());
 			
 			// Llamar al detector cada vez que se produce un envase.
 			averia = detectorFallas.verificarAveria();
@@ -429,7 +429,7 @@ public class Maquina {
 	/**
 	 * toString
 	 * Retorna el estado de la maquina.
-	 * @return String estado de la maquina
+	 * @return String estado de la maquina.
 	 */
 	public String toString(){
 		String activo = "Inactiva";
@@ -438,9 +438,9 @@ public class Maquina {
 			activo = "activa";
 		}
 		if(getCondicion() == 1){
-			condicion = "Da�o por "+Constantes.FALLA_MATERIA_PRIMA;
+			condicion = "Daño por "+Constantes.FALLA_MATERIA_PRIMA;
 		}else{
-			condicion = "Da�o por envase "+Constantes.FALLA_ENVASE;
+			condicion = "Daño por envase "+Constantes.FALLA_ENVASE;
 		}
 		String estado = "Marca: "+getMarca()+"\n";
 		estado += "Modelo: "+getModelo()+"\n";
@@ -452,4 +452,5 @@ public class Maquina {
 		
 		return estado;
 	}
+
 }

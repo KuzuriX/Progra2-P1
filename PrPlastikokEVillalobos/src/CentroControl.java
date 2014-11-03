@@ -1,5 +1,3 @@
-import java.sql.Date;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -23,7 +21,6 @@ public class CentroControl {
 	public CentroControl(Fabrica pfabrica) {
 		// Agregar un operario. Debe haber al menos uno.
 		Operario operario = new Operario("1-0222-0333", "Juan Perez", this);
-		listaOperarios = new ArrayList<Operario>();
 		listaOperarios.add(operario);
 		
 		// Inicializar las listas de solicitudes.
@@ -40,7 +37,7 @@ public class CentroControl {
 	 * Retorna el operario que se encuentre en una posicion especifica del array.
 	 * @return Operario operario del centro de control
 	 */
-	private Operario obtenerOperario(int pposicion) {
+	public Operario obtenerOperario(int pposicion) {
 		return listaOperarios.get(pposicion);
 	}
 	
@@ -68,7 +65,7 @@ public class CentroControl {
 		String lista = "";
 		
 		for (Operario objOperario: listaOperarios) {
-			lista += objOperario.toString() + "\n\n";
+			lista += objOperario.toString();
 		}
 		return lista;
 	}
@@ -233,15 +230,41 @@ public class CentroControl {
 	}
 	
 	/**
+	 * getListaOperarios
+	 * Retorna la lista de operarios en el centro de control.
+	 * @return lista de operarios.
+	 */
+	public ArrayList<Operario> getListaOperarios() {
+		return listaOperarios;
+	}
+	
+	/**
+	 * obtenerSolicitud
+	 * @param pid identificador de la solicitud
+	 * @return Solicitud objeto solicitud
+	 */
+	public Solicitud obtenerSolicitud(String pid) {
+		Solicitud objSolicitud = null;
+		
+		for (Solicitud solicitud: solicitudesDespachadas) {
+			if (solicitud.getId() == pid) {
+				objSolicitud = solicitud;
+			}
+		}
+		
+		return objSolicitud;
+	}
+	
+	/**
 	 * toString
 	 * Retorna el estado del centro de control.
 	 * @return String estado de los atributos del centro de control.
 	 */
 	public String toString() {
 		String estado = "Centro de Control \n" +
-						"   Operarios: \n" + listarOperarios() + "\n" + 
-						"   Solicitudes Despachadas: \n" + listarSolicitudes() + "\n\n" + 
-						"   Solicitudes Atendidas: \n" + listarSolicitudesAtendidas() + "\n";
+						"Operarios: \n" + listarOperarios() + "\n" + 
+						"Solicitudes Despachadas: \n" + listarSolicitudes() + "\n" + 
+						"Solicitudes Atendidas: \n" + listarSolicitudesAtendidas();
 		
 		return estado;
 	}

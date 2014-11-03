@@ -15,7 +15,7 @@ public class Fabrica {
 	public Fabrica(){
 		crearCentroControl();
 		// Crear al menos una máquina. No puede existir una fábrica sin máquinas.
-		crearMaquina();
+		crearMaquina(1, "", "", "");
 	}
 	
 	/**
@@ -46,29 +46,24 @@ public class Fabrica {
 	}
 	
 	/**
-	 * getMaquina
-	 * Retorna la maquina en una posicion especifica del arrya
-	 * @param pindex posicion en que se encuentra la maquina.
-	 * @return Maquina maquina en la posicion dada.
-	 */
-	public Maquina getMaquina(int pindex) {
-		return listaMaquinas.get(pindex);
-	}
-	
-	/**
 	 * agregarMaquina
 	 * Agrega una máquina a la lista de máquinas de la fábrica.
 	 */
-	private void agregarMaquina() {
-		listaMaquinas.add(new Maquina(getCentroControl()));
+	private void agregarMaquina(int ptipoMaquina, String pmarca, String pmodelo, String pannoFabricacion) {
+		if(ptipoMaquina == 1){
+			listaMaquinas.add(new Maquina(getCentroControl(), pmarca, pmodelo, pannoFabricacion));
+		}else{
+			listaMaquinas.add(new Gamma(getCentroControl(), pmarca, pmodelo, pannoFabricacion));
+		}
+		
 	}
 
 	/**
 	 * crearMaquina
 	 * Método que permite a clientes crear nuevas máquinas en la fábrica.
 	 */
-	public void crearMaquina() {
-		agregarMaquina();
+	public void crearMaquina(Integer ptipoMaquina ,String pmarca, String pmodelo, String pannoFabricacion) {
+		agregarMaquina(ptipoMaquina, pmarca, pmodelo, pannoFabricacion);
 	}
 	
 	/**
@@ -87,7 +82,7 @@ public class Fabrica {
 	 * 							la máquina.
 	 */
 	public void establecerParametrosMaq(int pindice, char pmodoOp, int pnumEnvases, char tamanannoEnvases, int grosorEnvases) {
-		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases, tamanannoEnvases, grosorEnvases); 
+		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases,tamanannoEnvases, grosorEnvases); 
 	}
 	
 	/**
@@ -108,21 +103,5 @@ public class Fabrica {
 			}
 		}
 		return maquinaRetornar;
-	}
-	
-	/**
-	 * toString
-	 * Retorna el estado de la fabrica.
-	 * @return String estado de la fabrica.
-	 */
-	public String toString() {
-		String estado = objCentroControl.toString() + "\n" +
-						"Maquinas: \n";
-		
-		for (Maquina objMaquina: listaMaquinas) {
-			estado += objMaquina.toString();
-		}
-		
-		return estado;
 	}
 }

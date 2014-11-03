@@ -127,9 +127,9 @@ public class Operario {
 	 * @return String estado del objeto Operario.
 	 */
 	public String toString() {
-		String estado = "\tCédula: " + getCedula() + "\n" +
-						"\tNombre: " +  getNombre() + "\n" +
-						"\tTotal de maquinas reparadas: " + getCantMaquinasRep();
+		String estado = "Cedula: " + getCedula() + "\n" +
+						"Nombre: " +  getNombre() + "\n" +
+						"Maquinas reparadas: " + getCantMaquinasRep();
 		
 		return estado;
 	}
