@@ -108,6 +108,7 @@ public class Operario {
 		if (maqAReparar != null) {
 			if (psolicitud.getProblema() == Constantes.FALLA_MATERIA_PRIMA) {
 				maqAReparar.cargarMateriaPrima();
+				psolicitud.setSolucion(Constantes.FALLA_MATERIA_PRIMA_SOLUCION);
 			}
 			// Activar la maquina para que vuelva a funcionamiento.
 			maqAReparar.activar();

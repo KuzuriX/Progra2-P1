@@ -199,7 +199,7 @@ public class Solicitud {
 	 * Establece un valor para el atributo problema.
 	 * @param pproblema descripcion del problema que tiene la maquina.
 	 */
-	private void setProblema(String pproblema) {
+	public void setProblema(String pproblema) {
 		problema = pproblema;
 	}
 	
@@ -217,7 +217,7 @@ public class Solicitud {
 	 * Establece un valor para el atributo solucion.
 	 * @param psolucion descripcion de la solucion al problema que tiene la maquina.
 	 */
-	private void setSolucion(String psolucion) {
+	public void setSolucion(String psolucion) {
 		solucion = psolucion;
 	}
 	

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Fabrica {
 	private ArrayList<Maquina> listaMaquinas = new ArrayList<>();
 	private CentroControl objCentroControl;
-	private int contadorMaquinas = 0;
 	
 	/**
 	 * Fabrica.
@@ -16,7 +15,8 @@ public class Fabrica {
 	public Fabrica(){
 		setCentroControl();
 		
-		// TODO: agregar al menos una maquina.
+		// TODO: agregar al menos una maquina. No puede existir una fabrica
+		// sin maquinas.
 	}
 	
 	/**
@@ -41,11 +41,10 @@ public class Fabrica {
 	}
 	
 	private void setMaquina(CentroControl pobjCentroControl){
-		listaMaquinas.add(new Maquina(pobjCentroControl, contadorMaquinas));
+		listaMaquinas.add(new Maquina(pobjCentroControl));
 	}
 		
 	public void crearMaquina(){
-		contadorMaquinas ++;
 		setMaquina(objCentroControl);
 	}
 	
