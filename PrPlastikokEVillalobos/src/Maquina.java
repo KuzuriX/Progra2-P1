@@ -31,6 +31,11 @@ public class Maquina {
 	public Maquina(CentroControl pobjCentroControl){
 		setCentroControl(pobjCentroControl);
 		setId();
+		setMarca("Plamasa");
+		setModelo("PL-1234");
+		setAnnoFabricacion("2014");
+		setModoOperacion(true);
+		setCantMateriaPrima(0);
 		crearMolde();
 		detectorFallas = new Detector(this);
 	}
@@ -327,12 +332,15 @@ public class Maquina {
 		double materiaPrima = getCantMateriaPrima();
 		String averia = "";
 		
+		System.out.println("Produciendo envases...");
 		while (getCantMateriaPrima() > 0 && isActivo()) {
 			materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
 			setCantMateriaPrima(materiaPrima);
 			
 			// Se ha producido un envase mas.
 			incrementarCantEnvasesProd();
+			
+			System.out.println(getCantEnvasesProd());
 			
 			// Llamar al detector cada vez que se produce un envase.
 			averia = detectorFallas.verificarAveria();
@@ -353,5 +361,23 @@ public class Maquina {
 		SimpleDateFormat fechaHora = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		
 		objCentroControl.crearSolicitud(getId(), fechaHora, getCantEnvasesProd(), getMoldeEnvases().getTamannoEnvase(), getMoldeEnvases().getGrosorEnvase(), ptipoAveria);
+	}
+	
+	/**
+	 * toString
+	 * Retorna el estado de la maquina.
+	 * @return String estado de la maquina
+	 */
+	public String toString() {
+		String estado = "Id: " + getId() + "\n" +
+						"Marca: " + getMarca() + "\n" +
+						"Modelo: " + getModelo() + "\n" +
+						"Año de fabricación: " + getAnnoFabricacion() + "\n" +
+						"Modo de operación: " + getModoOperacion() + "\n" +
+						"Cantidad de materia prima: " + getCantMateriaPrima() + "\n" +
+						"Está activa?: " + (isActivo() ? "si" : "no") + "\n" + 
+						"Molde: \n" + getMoldeEnvases().toString() + "\n\n";
+		
+		return estado;
 	}
 }

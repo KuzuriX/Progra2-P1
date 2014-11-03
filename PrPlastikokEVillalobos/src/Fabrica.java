@@ -23,7 +23,7 @@ public class Fabrica {
 	 * Retorna la referencia al centro de control que administra.
 	 * @return CentroControl referencia al centro de control.
 	 */
-	private CentroControl getCentroControl(){
+	public CentroControl getCentroControl(){
 		return objCentroControl;
 	}
 	
@@ -43,6 +43,16 @@ public class Fabrica {
 	 */
 	public ArrayList<Maquina> getMaquinas() {
 		return listaMaquinas;
+	}
+	
+	/**
+	 * getMaquina
+	 * Retorna la maquina en una posicion especifica del arrya
+	 * @param pindex posicion en que se encuentra la maquina.
+	 * @return Maquina maquina en la posicion dada.
+	 */
+	public Maquina getMaquina(int pindex) {
+		return listaMaquinas.get(pindex);
 	}
 	
 	/**
@@ -77,7 +87,7 @@ public class Fabrica {
 	 * 							la máquina.
 	 */
 	public void establecerParametrosMaq(int pindice, boolean pmodoOp, int pnumEnvases, char tamanannoEnvases, int grosorEnvases) {
-		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases,tamanannoEnvases, grosorEnvases); 
+		listaMaquinas.get(pindice).establecerParametros(pmodoOp, pnumEnvases,tamanannoEnvases, grosorEnvases); 
 	}
 	
 	/**
@@ -98,5 +108,21 @@ public class Fabrica {
 			}
 		}
 		return maquinaRetornar;
+	}
+	
+	/**
+	 * toString
+	 * Retorna el estado de la fabrica.
+	 * @return String estado de la fabrica.
+	 */
+	public String toString() {
+		String estado = objCentroControl.toString() + "\n" +
+						"Maquinas: \n";
+		
+		for (Maquina objMaquina: listaMaquinas) {
+			estado += objMaquina.toString();
+		}
+		
+		return estado;
 	}
 }

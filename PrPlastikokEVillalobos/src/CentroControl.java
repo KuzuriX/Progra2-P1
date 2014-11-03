@@ -23,6 +23,7 @@ public class CentroControl {
 	public CentroControl(Fabrica pfabrica) {
 		// Agregar un operario. Debe haber al menos uno.
 		Operario operario = new Operario("1-0222-0333", "Juan Perez", this);
+		listaOperarios = new ArrayList<Operario>();
 		listaOperarios.add(operario);
 		
 		// Inicializar las listas de solicitudes.
@@ -67,7 +68,7 @@ public class CentroControl {
 		String lista = "";
 		
 		for (Operario objOperario: listaOperarios) {
-			lista += objOperario.toString();
+			lista += objOperario.toString() + "\n\n";
 		}
 		return lista;
 	}
@@ -238,9 +239,9 @@ public class CentroControl {
 	 */
 	public String toString() {
 		String estado = "Centro de Control \n" +
-						"Operarios: \n" + listarOperarios() + "\n" + 
-						"Solicitudes Despachadas: \n" + listarSolicitudes() + "\n" + 
-						"Solicitudes Atendidas: \n" + listarSolicitudesAtendidas();
+						"   Operarios: \n" + listarOperarios() + "\n" + 
+						"   Solicitudes Despachadas: \n" + listarSolicitudes() + "\n\n" + 
+						"   Solicitudes Atendidas: \n" + listarSolicitudesAtendidas() + "\n";
 		
 		return estado;
 	}

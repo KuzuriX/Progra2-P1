@@ -94,8 +94,8 @@ public class Molde {
 	 * @return String estado del molde.
 	 */
 	public String toString() {
-		String estado = "Tamaño: " + getTamannoEnvase() + "\n" +
-						"Grosor: " + getGrosorEnvase();
+		String estado = "   Tamaño: " + getTamannoEnvase() + "\n" +
+						"   Grosor: " + getGrosorEnvase();
 		
 		return estado;
 	}
