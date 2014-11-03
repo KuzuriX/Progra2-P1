@@ -1,3 +1,6 @@
+import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -69,6 +72,13 @@ public class CentroControl {
 		return lista;
 	}
 	
+	public void crearSolicitud(String pidMaquina, SimpleDateFormat pfechaHoraAveria, int pcantEnvases, char ptamano, int pgrosor, String pproblema) {
+		// Crear una nueva solicitud.
+		Solicitud objSolicitud = new Solicitud(pidMaquina, pfechaHoraAveria, pcantEnvases, ptamano, pgrosor, pproblema);
+		// Despachar la solicitud a un operario.		
+		despacharSolicitud(objSolicitud);
+	}
+	
 	/**
 	 * despacharSolicitud
 	 * Despacha una solicitud de reparacion a un operario. Si hay mas de un
@@ -110,7 +120,7 @@ public class CentroControl {
 			psolicitud.asignarOperarioEncargado(operario1);
 		}
 		// Cambiar el estado de la solicitud y agregarla a la lista de despachadas.
-		psolicitud.setCondicionAtencion("despachada");
+		psolicitud.setCondicionAtencion(Constantes.SOLICITUD_CONDICION_DESPACHADA);
 		solicitudesDespachadas.add(psolicitud);
 	}
 	
@@ -124,7 +134,7 @@ public class CentroControl {
 		int indice = solicitudesDespachadas.indexOf(psolicitud);
 		
 		// Agregar la solicitud a la lista de atendidas.
-		psolicitud.setCondicionAtencion("atendida");
+		psolicitud.setCondicionAtencion(Constantes.SOLICITUD_CONDICION_ATENDIDA);
 		solicitudesAtendidas.add(psolicitud);
 		
 		// Eliminar la solicitud de la lista de despachadas.

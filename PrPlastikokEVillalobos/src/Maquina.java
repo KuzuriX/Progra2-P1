@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+
 /**
  * Maquina
  * @author Miguel García
@@ -5,6 +7,7 @@
 public class Maquina {
 	private static int contadorMaquinas = 0;
 	private String id;
+
 	private CentroControl objCentroControl;
 	public final static double MINIMO_MATERIA_PRIMA = 3.0;
 	private String marca;
@@ -16,9 +19,15 @@ public class Maquina {
 	private int condicion;
 	private boolean enMarcha;
 	private int cantEnvasesProd = 0;
+
 	public Molde moldeEnvases;
 	private int numEnvases;
-	private Detector objDetector;
+
+	private int numEnvases;
+	private CentroControl objCentroControl;
+	private Detector detectorFallas;
+	private Molde moldeEnvases;
+
 	
 	/**
 	 * Maquina. 
@@ -30,7 +39,10 @@ public class Maquina {
 		setCentroControl(pobjCentroControl);
 		setId();
 		crearMolde();
-		crearDetector();
+
+
+		detectorFallas = new Detector(this);
+
 	}
 	
 	/**
@@ -221,11 +233,11 @@ public class Maquina {
 	}
 	
 	/**
-	 * getActivo
+	 * isActivo
 	 * Retorna el valor del atributo activo.
 	 * @return boolean indica true o false si la máquina está activa o no.
 	 */
-	private boolean getActivo() {
+	private boolean isActivo() {
 		return activo;
 	}
 	
@@ -273,6 +285,15 @@ public class Maquina {
 	 */
 	public void setEnMarcha(boolean penMarcha) {
 		enMarcha = penMarcha;
+	}
+	
+	/**
+	 * getMoldeEnvases
+	 * Retorna el molde que utiliza la maquina para producir envases.
+	 * @return Molde molde que utiliza la maquina.
+	 */
+	public Molde getMoldeEnvases() {
+		return moldeEnvases;
 	}
 	
 	/**
@@ -325,6 +346,7 @@ public class Maquina {
 	 * Iniciar la produccion de envases.
 	 */
 	public void iniciarProduccion() {
+
 		// TODO: agregar la logica de producir envases.
 		
 		if(objDetector.verificarFalla() == 0){
@@ -339,19 +361,47 @@ public class Maquina {
 	public void detenerProduccion() {
 		// TODO: agregar la logica de detener la produccion de envases.
 		
+
+		double materiaPrima = getCantMateriaPrima();
+		String averia = "";
+		
+		while (getCantMateriaPrima() > 0 && isActivo()) {
+			materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
+			setCantMateriaPrima(materiaPrima);
+			
+			// Se ha producido un envase mas.
+			incrementarCantEnvasesProd();
+			
+			// Llamar al detector cada vez que se produce un envase.
+			averia = detectorFallas.verificarAveria();
+			if (averia != "") {
+				desactivarMaquina();
+				reportarAveria(averia);
+			}
+		}
+
 	}
 	
 	/**
-	 * verificarFalla
-	 * Verifica fallas en la máquina y en caso positivo se comunica con el centro
-	 * de control para solicitar una reparación.
+	 * reportarAveria
+	 * Reporta una averia al centro de control.
+	 * @param ptipoAveria averia que se produjo en la maquina. Esta es la averia
+	 * 					  reportada por el detector.
 	 */
-	//private void verificarFalla() {
+
+	private void verificarFalla() {
 		// TODO: Verificar que la configuración del envase a producir sea correcta.
 		
 		
 		// TODO: Verificar que la cantidad de materia prima sea suficiente para
 		// producir envases.
 		
-	//}
+	}
+
+	public void reportarAveria(String ptipoAveria) {
+		SimpleDateFormat fechaHora = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		
+		objCentroControl.crearSolicitud(getId(), fechaHora, getCantEnvasesProd(), getMoldeEnvases().getTamannoEnvase(), getMoldeEnvases().getGrosorEnvase(), ptipoAveria);
+	}
+
 }

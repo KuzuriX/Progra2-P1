@@ -55,6 +55,40 @@ public class Molde {
 	}
 	
 	/**
+	 * obtenerPorcMateria
+	 * Retorna el porcentaje de materia prima que consume una máquina
+	 * para un tamaño y grosor dados.
+	 * @return double Porcentaje de materia prima que se consume por envase.
+	 */
+	public double obtenerPorcMateria() {
+		double porcentajeMateria = 0;
+		
+		switch (getTamannoEnvase()) {
+			case 'P':
+				if (getGrosorEnvase() == 1) {
+					porcentajeMateria = Constantes.PORCENTAJE_ENVASE_P_1;
+				}
+				break;
+			case 'M':
+				if (getGrosorEnvase() == 1) {
+					porcentajeMateria = Constantes.PORCENTAJE_ENVASE_M_1;
+				} else if (getGrosorEnvase() == 2) {
+					porcentajeMateria = Constantes.PORCENTAJE_ENVASE_M_2;
+				}
+				break;
+			case 'G':
+				if (getGrosorEnvase() == 2) {
+					porcentajeMateria = Constantes.PORCENTAJE_ENVASE_G_2;
+				} else if (getGrosorEnvase() == 3) {
+					porcentajeMateria = Constantes.PORCENTAJE_ENVASE_G_3;
+				}
+				break;
+		}
+		
+		return porcentajeMateria;
+	}
+	
+	/**
 	 * toString
 	 * Retorna el estado del molde.
 	 * @return String estado del molde.
