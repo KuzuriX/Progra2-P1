@@ -6,7 +6,7 @@ public class Maquina {
 	private static int contadorMaquinas = 0;
 	private String id;
 	private CentroControl objCentroControl;
-	private final static double MINIMO_MATERIA_PRIMA = 3.0;
+	public final static double MINIMO_MATERIA_PRIMA = 3.0;
 	private String marca;
 	private String modelo;
 	private String annoFabricacion;
@@ -16,8 +16,9 @@ public class Maquina {
 	private int condicion;
 	private boolean enMarcha;
 	private int cantEnvasesProd = 0;
-	private Molde moldeEnvases;
+	public Molde moldeEnvases;
 	private int numEnvases;
+	private Detector objDetector;
 	
 	/**
 	 * Maquina. 
@@ -29,6 +30,7 @@ public class Maquina {
 		setCentroControl(pobjCentroControl);
 		setId();
 		crearMolde();
+		crearDetector();
 	}
 	
 	/**
@@ -66,6 +68,18 @@ public class Maquina {
 	 */
 	private void crearMolde() {
 		moldeEnvases = new Molde();
+	}
+	
+	private void crearDetector(){
+		setObjDetector(new Detector(this));
+	}
+	
+	public void setObjDetector(Detector pobjDetector) {
+		objDetector = pobjDetector;
+	}
+	
+	public Detector getObjDetector() {
+		return objDetector;
 	}
 	
 	/**
@@ -312,6 +326,10 @@ public class Maquina {
 	 */
 	public void iniciarProduccion() {
 		// TODO: agregar la logica de producir envases.
+		
+		if(objDetector.verificarFalla() == 0){
+			
+		}
 	}
 	
 	/**
@@ -320,6 +338,7 @@ public class Maquina {
 	 */
 	public void detenerProduccion() {
 		// TODO: agregar la logica de detener la produccion de envases.
+		
 	}
 	
 	/**
@@ -327,12 +346,12 @@ public class Maquina {
 	 * Verifica fallas en la máquina y en caso positivo se comunica con el centro
 	 * de control para solicitar una reparación.
 	 */
-	private void verificarFalla() {
+	//private void verificarFalla() {
 		// TODO: Verificar que la configuración del envase a producir sea correcta.
 		
 		
 		// TODO: Verificar que la cantidad de materia prima sea suficiente para
 		// producir envases.
 		
-	}
+	//}
 }
