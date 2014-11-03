@@ -19,6 +19,8 @@ public class CentroControl {
 	 *  3. Inicializa la lista de solicitudes atendidas.
 	 */
 	public CentroControl(Fabrica pfabrica) {
+		listaOperarios = new ArrayList<Operario>();
+		
 		// Agregar un operario. Debe haber al menos uno.
 		Operario operario = new Operario("1-0222-0333", "Juan Perez", this);
 		listaOperarios.add(operario);
