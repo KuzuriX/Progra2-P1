@@ -70,14 +70,14 @@ public class Fabrica {
 	 * @param pmodoOp 		    Modo de operación de la máquina. True indica modo
 	 * 						    de operación continuo. False indica modo de 
 	 * 							operación a intervalos.
-	 * @param pnumEnvases 
+	 * @param pnumEnvases		Cantidad de envases a producir por intervalo.
 	 * @param tamanannoEnvases 	Indica el tamaño de los envases que producirá
 	 * 						   	la máquina.
 	 * @param grosorEnvases		Indica el grosor de los envases que producirá
 	 * 							la máquina.
 	 */
 	public void establecerParametrosMaq(int pindice, boolean pmodoOp, int pnumEnvases, char tamanannoEnvases, int grosorEnvases) {
-		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases, tamanannoEnvases, grosorEnvases); 
+		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases,tamanannoEnvases, grosorEnvases); 
 	}
 	
 	/**
