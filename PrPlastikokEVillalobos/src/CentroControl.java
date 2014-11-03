@@ -160,7 +160,7 @@ public class CentroControl {
 	 * Retorna la lista de las solicitudes atendidas por el centro de control.
 	 * @return String lista de solicitudes atendidas.
 	 */
-	private String listarSolicitudesAtendidas() {
+	public String listarSolicitudesAtendidas() {
 		String lista = "";
 		
 		for (Solicitud objSolicitud: solicitudesAtendidas) {

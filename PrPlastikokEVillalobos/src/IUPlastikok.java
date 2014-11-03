@@ -112,7 +112,18 @@ public class IUPlastikok {
                         
             case 8: //Listar solicitudes despachadas a un operario
             	out.println(listarSolicitudesDespachadasOper());
-	     		break;    
+	     		break; 
+	     		
+            case 9: //Listar solicitudes despachadas a un operario
+            	repararMaquina();
+	     		break;
+	     		
+            case 10: //Listar solicitudes despachadas a un operario
+            	out.println(listarSolicitudesDespachadasxCentro());
+	     		break;
+            case 11: //Listar solicitudes despachadas a un operario
+            	out.println(listarSolicitudesAtendidas());
+	     		break;
 			
 			case 0: //Salir de la aplicacion
 
@@ -206,11 +217,23 @@ public class IUPlastikok {
 		return lista;
 	}
 	
-	private static void repararMaquina(){
-		String msj = "Existen las sguientes solicitudes de reparacion, seleccione alguna: \n";
+	private static void repararMaquina()throws java.io.IOException{
+		String msj = "Existen las sguientes solicitudes de reparacion, digite el id de la Maquina a reparar: \n";
 		msj += objFabrica.getCentroControl().listarSolicitudes();
+		out.println(msj);
+		String idMaquinaString = in.readLine();
+		
+		objFabrica.getCentroControl().obtenerSolicitud(idMaquinaString).getOperarioEncargado().repararMaquina(objFabrica.getCentroControl().obtenerSolicitud(idMaquinaString));
 		
 	} 
+	
+	private static String listarSolicitudesDespachadasxCentro(){
+		return objFabrica.getCentroControl().listarSolicitudes();
+	}
+	
+	private static String listarSolicitudesAtendidas(){
+		return objFabrica.getCentroControl().listarSolicitudesAtendidas();
+	}
 	
 	private static int seleccionarMaquina()throws java.io.IOException{
 		String msj = "Existen las sguientes maquinas en la fabrica, seleccione alguna: \n";

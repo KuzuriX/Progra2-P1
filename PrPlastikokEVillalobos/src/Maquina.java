@@ -379,7 +379,7 @@ public class Maquina {
 				
 			}
 		}
-		String msj = "Se produjeron "+getCantEnvasesProd()+" envaes \n";
+		String msj = "Se produjeron "+getCantEnvasesProd()+" envases \n";
 		msj += "Quedan "+getCantMateriaPrima()+" de materia prima";
 		
 		return msj;

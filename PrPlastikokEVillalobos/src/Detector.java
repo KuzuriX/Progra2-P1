@@ -68,7 +68,7 @@ public class Detector {
 		
 		// Verificar si la cantidad de materia prima es suficiente para producir
 		// el siguiente envase.
-		if (maquina.getCantMateriaPrima() < maquina.getMoldeEnvases().obtenerPorcMateria()) {
+		if (maquina.getCantMateriaPrima() < maquina.MINIMO_MATERIA_PRIMA) {
 			averia = Constantes.FALLA_MATERIA_PRIMA;
 		}
 		
