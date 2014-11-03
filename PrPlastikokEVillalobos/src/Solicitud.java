@@ -12,8 +12,8 @@ public class Solicitud {
 	private Date fechaAveria;
 	private Time horaAveria;
 	private int numEnvasesProducidos;
-	private String tamano;
-	private String grosor;
+	private char tamano;
+	private int grosor;
 	private Operario operarioEncargado;
 	private String problema;
 	private String solucion;
@@ -23,7 +23,7 @@ public class Solicitud {
 	 * Constructor. Crear una solicitud de reparacion.
 	 * 
 	 */
-	public Solicitud(String pidMaquina, Date pfechaAveria, Time phoraAveria, int pcantEnvases, String ptamano, String pgrosor, String pproblema) {
+	public Solicitud(String pidMaquina, Date pfechaAveria, Time phoraAveria, int pcantEnvases, char ptamano, int pgrosor, String pproblema) {
 		// Cuando se crea una solicitud siempre tiene estado "pendiente".
 		setCondicionAtencion("pendiente");
 		setIdMaquina(pidMaquina);
@@ -58,7 +58,7 @@ public class Solicitud {
 	 * Retorna el identificador de la maquina averiada.
 	 * @return String identificador de la maquina averiada.
 	 */
-	private String getIdMaquina() {
+	public String getIdMaquina() {
 		return idMaquina;
 	}
 	
@@ -130,9 +130,10 @@ public class Solicitud {
 	/**
 	 * getTamano
 	 * Retorna el tamaño del envase utilizado por la maquina averiada.
-	 * @return String tamaño de envases producidos.
+	 * Los posibles valores son: "P" (pequeño), "M" (mediano) y "G" (grande).
+	 * @return char tamaño de envases producidos.
 	 */
-	private String getTamano() {
+	private char getTamano() {
 		return tamano;
 	}
 	
@@ -140,18 +141,19 @@ public class Solicitud {
 	 * setTamano
 	 * Establece un valor para el tamaño de envases utilizado por la 
 	 * maquina averiada.
+	 * Los posibles valores son: "P" (pequeño), "M" (mediano) y "G" (grande).
 	 * @param ptamano grosor del envase.
 	 */
-	private void setTamano(String ptamano) {
+	private void setTamano(char ptamano) {
 		tamano = ptamano;
 	}
 	
 	/**
 	 * getGrosor
 	 * Retorna el grosor del envase utilizado por la maquina averiada.
-	 * @return String grosor de envases producidos.
+	 * @return int grosor de envases producidos.
 	 */
-	private String getGrosor() {
+	private int getGrosor() {
 		return grosor;
 	}
 	
@@ -161,7 +163,7 @@ public class Solicitud {
 	 * maquina averiada.
 	 * @param pgrosor grosor del envase.
 	 */
-	private void setGrosor(String pgrosor) {
+	private void setGrosor(int pgrosor) {
 		grosor = pgrosor;
 	}
 	
@@ -188,7 +190,7 @@ public class Solicitud {
 	 * Retorna la descripcion del problema que tenia la maquina averiada.
 	 * @return String descripcion del problema.
 	 */
-	private String getProblema() {
+	public String getProblema() {
 		return problema;
 	}
 	

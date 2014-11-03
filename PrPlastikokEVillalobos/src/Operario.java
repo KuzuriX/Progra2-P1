@@ -5,7 +5,8 @@
 public class Operario {
 	private String cedula;
 	private String nombre;
-	private int cantMaquinasRep;
+	private int cantMaquinasRep = 0;
+	private CentroControl centroControl;
 	
 	/**
 	 * Operario
@@ -13,9 +14,10 @@ public class Operario {
 	 * @param pcedula número de cedula del operario
 	 * @param pnombre nombre completo del operario
 	 */
-	public Operario(String pcedula, String pnombre) {
+	public Operario(String pcedula, String pnombre, CentroControl pCentroControl) {
 		setCedula(pcedula);
 		setNombre(pnombre);
+		setCentroControl(pCentroControl);
 	}
 	
 	/**
@@ -69,19 +71,53 @@ public class Operario {
 	 */
 	private void incrementarCantMaquinasRep() {
 		cantMaquinasRep++;
-	} 
+	}
+	
+	/**
+	 * getCentroControl
+	 * Retorna el centro de control de averias relacionado con el operario.
+	 * @return CentroControl el centro de control asociado al operario.
+	 */
+	private CentroControl getCentroControl() {
+		return centroControl;
+	}
+	
+	/**
+	 * setCentroControl
+	 * Establece una referencia con un centro de control de averias.
+	 * @param pcentroControl el centro de control que debe asociarse 
+	 * con el operario.
+	 */
+	private void setCentroControl(CentroControl pcentroControl) {
+		centroControl = pcentroControl;
+	}
 	
 	/**
 	 * repararMaquina
-	 * Repara una máquina averiada.
-	 * 
+	 * Repara una máquina averiada. Si la falla de la maquina se debe a que la 
+	 * materia prima se ha acabado, entonces se debe cargar la maquina.
+	 * Luego la materia se debe activar y se debe reportar al centro de control
+	 * la reparacion de la maquina. Finalmente se incrementa el numero de maquinas
+	 * que ha reparado el operario.
+	 * @param psolicitud solicitud de reparacion.
 	 */
-	public void repararMaquina() {
-		// TODO @eli: agregar toda la logica para reparar la maquina.
+	public void repararMaquina(Solicitud psolicitud) {
+		// Solicitar una referencia a la maquina a reparar.
+		Maquina maqAReparar = centroControl.obtenerMaquina(psolicitud.getIdMaquina());
 		
-		// Una vez finalizada la reparacion, se debe incrementar en uno
-		// el total de maquinas reparadas.
-		incrementarCantMaquinasRep();
+		if (maqAReparar != null) {
+			if (psolicitud.getProblema() == Constantes.FALLA_MATERIA_PRIMA) {
+				maqAReparar.cargarMateriaPrima();
+			}
+			// Activar la maquina para que vuelva a funcionamiento.
+			maqAReparar.activar();
+			// Solicitar al Centro de Control que mueva la solicitud de la lista
+			// de despachadas a atendidas.
+			centroControl.moverSolicitudAtendida(psolicitud);
+			// Una vez finalizada la reparacion, se debe incrementar en uno
+			// el total de maquinas reparadas.
+			incrementarCantMaquinasRep();
+		}
 	}
 	
 	/**

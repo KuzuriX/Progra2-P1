@@ -8,6 +8,7 @@ public class CentroControl {
 	private ArrayList<Operario> listaOperarios;
 	private ArrayList<Solicitud> solicitudesDespachadas;
 	private ArrayList<Solicitud> solicitudesAtendidas;
+	private Fabrica fabrica;
 	
 	/**
 	 * Centro de control
@@ -16,14 +17,18 @@ public class CentroControl {
 	 *  2. Inicializa la lista de solicitudes despachadas.
 	 *  3. Inicializa la lista de solicitudes atendidas.
 	 */
-	public CentroControl() {
-		// Agregar un operario.
-		Operario operario = new Operario("1-0222-0333", "Juan Perez");
+	public CentroControl(Fabrica pfabrica) {
+		// Agregar un operario. Debe haber al menos uno.
+		Operario operario = new Operario("1-0222-0333", "Juan Perez", this);
 		listaOperarios.add(operario);
 		
 		// Inicializar las listas de solicitudes.
 		solicitudesDespachadas = new ArrayList<Solicitud>();
 		solicitudesAtendidas = new ArrayList<Solicitud>();
+		
+		// Establecer la relacion con la fabrica a la que pertenece el centro
+		// de control.
+		setFabrica(pfabrica);
 	}
 
 	/**
@@ -44,7 +49,7 @@ public class CentroControl {
 	 */
 	public void crearOperario(String pcedula, String pnombre) {
 		if (listaOperarios.size() <= 2) {
-			Operario objOperario = new Operario(pcedula, pnombre);
+			Operario objOperario = new Operario(pcedula, pnombre, this);
 			listaOperarios.add(objOperario);
 		}
 	}
@@ -157,5 +162,33 @@ public class CentroControl {
 			}
 		}
 		return lista;
+	}
+	
+	/**
+	 * getFabrica
+	 * Retorna la fabrica a la que pertenece el centro de control.
+	 * @return Fabrica fabrica a la que pertenece el centro de control.
+	 */
+	private Fabrica getFabrica() {
+		return fabrica;
+	}
+	
+	/**
+	 * setFabrica
+	 * Establece una referencia a la fabrica a la que pertenece el centro de control.
+	 * @return pfabrica fabrica a la que pertenece el centro de control.
+	 */
+	private void setFabrica(Fabrica pfabrica) {
+		fabrica = pfabrica;
+	}
+	
+	/**
+	 * obtenerMaquina
+	 * Retorna la referencia a una maquina de la fabrica.
+	 * @param pidMaquina id de la maquina a obtener
+	 * @return Maquina referencia a la maquina.
+	 */
+	public Maquina obtenerMaquina(String pidMaquina) {
+		return fabrica.obtenerMaquina(pidMaquina);
 	}
 }

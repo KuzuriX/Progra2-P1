@@ -22,6 +22,24 @@ public class Maquina {
 		crearMolde();
 	}
 	
+	/**
+	 * getId
+	 * Retorna el identificador de la maquina.
+	 * @return String identificador de la maquina
+	 */
+	public String getId() {
+		return id;
+	}
+	
+	/**
+	 * setId
+	 * Establece un valor para el identificador de la maquina.
+	 * @param pid identificador de la maquina.
+	 */
+	public void setId(String pid) {
+		id = pid;
+	}
+	
 	private void setCentroControl(CentroControl pobjCentroControl){
 		objCentroControl = pobjCentroControl;
 	}
@@ -128,4 +146,19 @@ public class Maquina {
 		return numEnvases;
 	}
 
+	/**
+	 * cargarMateriaPrima
+	 * Carga al 100% la materia prima de la maquina.
+	 */
+	public void cargarMateriaPrima() {
+		setCantMateriaPrima(100);
+	}
+	
+	/**
+	 * activar
+	 * Activa la maquina para entrar en produccion.
+	 */
+	public void activar() {
+		setActivo(true);
+	}
 }
