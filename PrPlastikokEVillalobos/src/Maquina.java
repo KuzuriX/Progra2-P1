@@ -8,25 +8,22 @@ public class Maquina {
 	private static int contadorMaquinas = 0;
 	private String id;
 
-	private CentroControl objCentroControl;
+	protected CentroControl objCentroControl;
 	public final static double MINIMO_MATERIA_PRIMA = 3.0;
-	private String marca;
-	private String modelo;
-	private String annoFabricacion;
-	private boolean modoOperacion;
-	private double cantMateriaPrima;
-	private boolean activo;
-	private int condicion;
-	private boolean enMarcha;
-	private int cantEnvasesProd = 0;
+	protected String marca;
+	protected String modelo;
+	protected String annoFabricacion;
+	protected char modoOperacion;
+	protected double cantMateriaPrima;
+	protected boolean activo;
+	protected int condicion;
+	protected boolean enMarcha;
+	protected int cantEnvasesProd = 0;
 
 	public Molde moldeEnvases;
-	private int numEnvases;
+	protected int numEnvases;
 
-	private int numEnvases;
-	private CentroControl objCentroControl;
-	private Detector detectorFallas;
-	private Molde moldeEnvases;
+	protected Detector detectorFallas;
 
 	
 	/**
@@ -39,10 +36,7 @@ public class Maquina {
 		setCentroControl(pobjCentroControl);
 		setId();
 		crearMolde();
-
-
-		detectorFallas = new Detector(this);
-
+		crearDetector(this);
 	}
 	
 	/**
@@ -82,16 +76,16 @@ public class Maquina {
 		moldeEnvases = new Molde();
 	}
 	
-	private void crearDetector(){
-		setObjDetector(new Detector(this));
+	private void crearDetector(Maquina pobjMaquina){
+		setDetectorFallas(pobjMaquina);
 	}
 	
-	public void setObjDetector(Detector pobjDetector) {
-		objDetector = pobjDetector;
+	public void setDetectorFallas(Maquina pobjMaquina) {
+		detectorFallas = new Detector(pobjMaquina);
 	}
 	
-	public Detector getObjDetector() {
-		return objDetector;
+	public Detector detectorFallas() {
+		return detectorFallas;
 	}
 	
 	/**
@@ -104,7 +98,7 @@ public class Maquina {
 	 * @param ptamannoEnvases	Tamaño de los envases a producir.
 	 * @param pgrosorEnvases 	Grosor de los envases a producir.
 	 */
-	public void establecerParametros(boolean pmodoOp, int pnumEnvases, char ptamannoEnvases, int pgrosorEnvases){
+	public void establecerParametros(char pmodoOp, int pnumEnvases, char ptamannoEnvases, int pgrosorEnvases){
 		setModoOperacion(pmodoOp);
 		setNumEnvases(pnumEnvases);
 		setMolde(ptamannoEnvases, pgrosorEnvases);		
@@ -116,7 +110,7 @@ public class Maquina {
 	 * @return boolean Modo de operación. True indica modo de operación continuo.
 	 * 				   False, indica modo a intervalos.
 	 */
-	public boolean getModoOperacion(){
+	public char getModoOperacion(){
 		return modoOperacion;
 	}
 	
@@ -127,7 +121,7 @@ public class Maquina {
 	 * a intervalos.
 	 * @param pmodOper Modo de operación de la máquina.
 	 */
-	private void setModoOperacion(boolean pmodOper){
+	private void setModoOperacion(char pmodOper){
 		modoOperacion = pmodOper;
 	}
 	
@@ -144,7 +138,7 @@ public class Maquina {
 	 * incrementarCantEnvasesProd
 	 * Incrementa en uno la cantidad de envases producidos por la máquina.
 	 */
-	private void incrementarCantEnvasesProd() {
+	protected void incrementarCantEnvasesProd() {
 		cantEnvasesProd ++;
 	}
 	
@@ -218,7 +212,7 @@ public class Maquina {
 	 * Retorna la cantidad de materia prima que tiene la maquina.
 	 * @return double cantidad de materia prima disponible.
 	 */
-	public double getCantMateriaPrima() {
+	protected double getCantMateriaPrima() {
 		return cantMateriaPrima;
 	}
 	
@@ -237,7 +231,7 @@ public class Maquina {
 	 * Retorna el valor del atributo activo.
 	 * @return boolean indica true o false si la máquina está activa o no.
 	 */
-	private boolean isActivo() {
+	protected boolean isActivo() {
 		return activo;
 	}
 	
@@ -347,18 +341,50 @@ public class Maquina {
 	 */
 	public void iniciarProduccion() {
 
-		// TODO: agregar la logica de producir envases.
 		
-		if(objDetector.verificarFalla() == 0){
-			
+		double materiaPrima = getCantMateriaPrima();
+		String averia = "";
+		
+		if(modoOperacion == 'C'){
+			while (getCantMateriaPrima() > 0 && isActivo()) {
+				materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
+				setCantMateriaPrima(materiaPrima);
+				
+				// Se ha producido un envase mas.
+				incrementarCantEnvasesProd();
+				
+				// Llamar al detector cada vez que se produce un envase.
+				averia = detectorFallas.verificarAveria();
+				if (averia != "") {
+					desactivarMaquina();
+					reportarAveria(averia);
+				}
+			}
+		}else{
+			while (numEnvases > cantEnvasesProd) {
+				materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
+				setCantMateriaPrima(materiaPrima);
+				
+				// Se ha producido un envase mas.
+				incrementarCantEnvasesProd();
+				
+				// Llamar al detector cada vez que se produce un envase.
+				averia = detectorFallas.verificarAveria();
+				if (averia != "") {
+					desactivarMaquina();
+					reportarAveria(averia);
+				}
+				
+			}
 		}
+		
 	}
 	
 	/**
 	 * detenerProduccion
 	 * Detiene la produccion de envases.
 	 */
-	public void detenerProduccion() {
+	/*public void detenerProduccion() {
 		// TODO: agregar la logica de detener la produccion de envases.
 		
 
@@ -380,7 +406,7 @@ public class Maquina {
 			}
 		}
 
-	}
+	}*/
 	
 	/**
 	 * reportarAveria
@@ -388,20 +414,37 @@ public class Maquina {
 	 * @param ptipoAveria averia que se produjo en la maquina. Esta es la averia
 	 * 					  reportada por el detector.
 	 */
-
-	private void verificarFalla() {
-		// TODO: Verificar que la configuración del envase a producir sea correcta.
-		
-		
-		// TODO: Verificar que la cantidad de materia prima sea suficiente para
-		// producir envases.
-		
-	}
-
 	public void reportarAveria(String ptipoAveria) {
 		SimpleDateFormat fechaHora = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		
 		objCentroControl.crearSolicitud(getId(), fechaHora, getCantEnvasesProd(), getMoldeEnvases().getTamannoEnvase(), getMoldeEnvases().getGrosorEnvase(), ptipoAveria);
+	}
+	
+	/**
+	 * toString
+	 * Retorna el estado de la maquina.
+	 * @return String estado de la maquina.
+	 */
+	public String toString(){
+		String activo = "Inactiva";
+		String condicion = "Buena";
+		if(isActivo()){
+			activo = "activa";
+		}
+		if(getCondicion() == 1){
+			condicion = "Da�o por "+Constantes.FALLA_MATERIA_PRIMA;
+		}else{
+			condicion = "Da�o por envase "+Constantes.FALLA_ENVASE;
+		}
+		String estado = "Marca: "+getMarca()+"\n";
+		estado += "Modelo: "+getModelo()+"\n";
+		estado += "Modo de operacion: "+modoOperacion+"\n";
+		estado += "Cantidad de materia prima: "+getCantMateriaPrima()+"\n";
+		estado += "Estado de actividad"+activo+"\n";
+		estado += "Condicion: "+condicion+"\n";
+		estado += "Cantidad de envases producidos: "+getCantEnvasesProd()+"\n";
+		
+		return estado;
 	}
 
 }

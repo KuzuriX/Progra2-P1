@@ -76,7 +76,7 @@ public class Fabrica {
 	 * @param grosorEnvases		Indica el grosor de los envases que producirá
 	 * 							la máquina.
 	 */
-	public void establecerParametrosMaq(int pindice, boolean pmodoOp, int pnumEnvases, char tamanannoEnvases, int grosorEnvases) {
+	public void establecerParametrosMaq(int pindice, char pmodoOp, int pnumEnvases, char tamanannoEnvases, int grosorEnvases) {
 		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases,tamanannoEnvases, grosorEnvases); 
 	}
 	
