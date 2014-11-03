@@ -1,3 +1,4 @@
+
 /**
  * Detector
  * @author Elizabeth Villalobos
@@ -73,4 +74,5 @@ public class Detector {
 		
 		return averia;
 	}
+
 }

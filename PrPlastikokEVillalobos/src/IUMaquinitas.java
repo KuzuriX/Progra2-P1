@@ -11,8 +11,8 @@ public class IUMaquinitas {
 		objFabrica.getCentroControl().crearOperario("2-0444-0888", "Jose Mora");
 		
 		// Establecer nuevos parametros para las maquinas.
-		objFabrica.establecerParametrosMaq(0, true, 0, 'P', 1);
-		objFabrica.establecerParametrosMaq(1, true, 0, 'G', 3);
+		objFabrica.establecerParametrosMaq(0, 'C', 0, 'P', 1);
+		objFabrica.establecerParametrosMaq(1, 'I', 0, 'G', 3);
 		
 		out.println(objFabrica.toString());
 		
