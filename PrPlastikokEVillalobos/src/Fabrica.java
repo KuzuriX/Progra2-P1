@@ -9,14 +9,13 @@ public class Fabrica {
 	private CentroControl objCentroControl;
 	
 	/**
-	 * Fabrica.
-	 * Constructor por defecto. Crea un centro de control y al menos una maquina.
+	 * Fábrica.
+	 * Constructor por defecto. Crea un centro de control y al menos una máquina.
 	 */
 	public Fabrica(){
-		setCentroControl();
-		
-		// TODO: agregar al menos una maquina. No puede existir una fabrica
-		// sin maquinas.
+		crearCentroControl();
+		// Crear al menos una máquina. No puede existir una fábrica sin máquinas.
+		crearMaquina();
 	}
 	
 	/**
@@ -29,27 +28,56 @@ public class Fabrica {
 	}
 	
 	/**
-	 * setCentroControl
-	 * Establece una referencia con el centro de control que administra.
+	 * crearCentroControl
+	 * Crea un centro de control. Establece una referencia con el centro de control 
+	 * que la fábrica administra.
 	 */
-	private void setCentroControl(){
+	private void crearCentroControl(){
 		objCentroControl = new CentroControl(this);
 	}
 	
-	public ArrayList<Maquina> getMaquinas(){
+	/**
+	 * getMaquinas
+	 * Retorna la lista de máquinas que la fábrica tiene disponible.
+	 * @return ArrayList<Maquina> lista de máquinas que tiene la fábrica.
+	 */
+	public ArrayList<Maquina> getMaquinas() {
 		return listaMaquinas;
 	}
 	
-	private void setMaquina(CentroControl pobjCentroControl){
-		listaMaquinas.add(new Maquina(pobjCentroControl));
+	/**
+	 * agregarMaquina
+	 * Agrega una máquina a la lista de máquinas de la fábrica.
+	 */
+	private void agregarMaquina() {
+		listaMaquinas.add(new Maquina(getCentroControl()));
 	}
-		
-	public void crearMaquina(){
-		setMaquina(objCentroControl);
+
+	/**
+	 * crearMaquina
+	 * Método que permite a clientes crear nuevas máquinas en la fábrica.
+	 */
+	public void crearMaquina() {
+		agregarMaquina();
 	}
 	
-	public void establecerParametrosMaq(int pindice, boolean pmodoOp, int pnumEnvases, char tamanannoENvases, int grosorEnvases){
-		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases, tamanannoENvases, grosorEnvases); 
+	/**
+	 * establecerParametrosMaq
+	 * Establece los parámetros que utilizarán las máquinas para producir envases.
+	 * @param pindice 		    Indica en la lista de máquinas donde se encuentra 
+	 * 						    la máquina a la cual se le van a cambiar los 
+	 * 						    parámetros.
+	 * @param pmodoOp 		    Modo de operación de la máquina. True indica modo
+	 * 						    de operación continuo. False indica modo de 
+	 * 							operación a intervalos.
+	 * @param pnumEnvases 
+	 * @param tamanannoEnvases 	Indica el tamaño de los envases que producirá
+	 * 						   	la máquina.
+	 * @param grosorEnvases		Indica el grosor de los envases que producirá
+	 * 							la máquina.
+	 */
+	public void establecerParametrosMaq(int pindice, boolean pmodoOp, int pnumEnvases, char tamanannoEnvases, int grosorEnvases) {
+		listaMaquinas.get(pindice-1).establecerParametros(pmodoOp, pnumEnvases, tamanannoEnvases, grosorEnvases); 
 	}
 	
 	/**
