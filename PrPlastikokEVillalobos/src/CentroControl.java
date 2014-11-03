@@ -8,7 +8,6 @@ public class CentroControl {
 	private ArrayList<Operario> listaOperarios;
 	private ArrayList<Solicitud> solicitudesDespachadas;
 	private ArrayList<Solicitud> solicitudesAtendidas;
-	private final int MAX_OPERARIOS = 2;
 	
 	/**
 	 * Centro de control
@@ -43,8 +42,8 @@ public class CentroControl {
 	 * @param pcedula cedula del operario a crear.
 	 * @param pnombre nombre del operario a crear.
 	 */
-	private void crearOperario(String pcedula, String pnombre) {
-		if (listaOperarios.size() <= MAX_OPERARIOS) {
+	public void crearOperario(String pcedula, String pnombre) {
+		if (listaOperarios.size() <= 2) {
 			Operario objOperario = new Operario(pcedula, pnombre);
 			listaOperarios.add(objOperario);
 		}
@@ -54,10 +53,109 @@ public class CentroControl {
 	 * despacharSolicitud
 	 * Despacha una solicitud de reparacion a un operario. Si hay mas de un
 	 * operario es necesario determinar cual tiene menos solicitudes asignadas.
+	 * @param psolicitud solicitud a despachar.
 	 */
-	private void despacharSolicitud() {
-		if (listaOperarios.size() > 0) {
+	private void despacharSolicitud(Solicitud psolicitud) {
+		Operario operario1 = (Operario) listaOperarios.get(0);
+		
+		// Si hay mas de un operario, entonces asignar la solicitud a quien
+		// tenga menos asignadas.
+		if (listaOperarios.size() > 1 && solicitudesDespachadas.size() > 0) {	
+			Operario operario2 = (Operario) listaOperarios.get(1);
 			
+			int op1Cont = 0;
+			int op2Cont = 0;
+			
+			for (int i = 0; i < solicitudesDespachadas.size(); i++) {
+				Solicitud solicitud = (Solicitud) solicitudesDespachadas.get(i);
+				if (solicitud.getOperarioEncargado().getCedula() == operario1.getCedula()) {
+					op1Cont++;
+				} else {
+					op2Cont++;
+				}
+			}
+			
+			// Si el operario 1 tiene mas solicitudes asignadas que el operario 2
+			// entonces asignarle la solicitud al operario 2.		
+			if (op1Cont > op2Cont) {
+				psolicitud.asignarOperarioEncargado(operario2);
+			} else {
+				// Si el operario 2 tiene igual cantidad o mas solicitudes que
+				// el operario 1, entonces asignar la solicitud al operario 1.
+				psolicitud.asignarOperarioEncargado(operario1);
+			}
+		} else {
+			// Si solo hay un operario en el centro, entoces asignarle 
+			// la solicitud.
+			psolicitud.asignarOperarioEncargado(operario1);
 		}
+		// Cambiar el estado de la solicitud y agregarla a la lista de despachadas.
+		psolicitud.setCondicionAtencion("despachada");
+		solicitudesDespachadas.add(psolicitud);
+	}
+	
+	/**
+	 * moverSolicitudAtendida
+	 * Mover una solicitud de la lista de despachadas a atendidas.
+	 * @param psolicitud solicitud que debe ser movida.
+	 */
+	public void moverSolicitudAtendida(Solicitud psolicitud) {
+		// Obtener el indice de la solicitud en la lista.
+		int indice = solicitudesDespachadas.indexOf(psolicitud);
+		
+		// Agregar la solicitud a la lista de atendidas.
+		psolicitud.setCondicionAtencion("atendida");
+		solicitudesAtendidas.add(psolicitud);
+		
+		// Eliminar la solicitud de la lista de despachadas.
+		solicitudesDespachadas.remove(indice);
+	}
+	
+	/**
+	 * listarSolicitudes
+	 * Retorna la lista de las solicitudes despachadas por el centro de control.
+	 * @return String lista de solicitudes despachadas.
+	 */
+	public String listarSolicitudes() {
+		String lista = "";
+		
+		for (Solicitud objSolicitud: solicitudesDespachadas) {
+			lista += objSolicitud.toString();
+		}
+		return lista;
+	}
+	
+	/**
+	 * listarSolicDespachadasOperario
+	 * Retorna la lista de las solicitudes despachadas a el operario pasado
+	 * por parametro.
+	 * @return String lista de solicitudes despachadas por operario.
+	 */
+	public String listarSolicDespachadasOperario(Operario poperario) {
+		String lista = "";
+		
+		for (Solicitud objSolicitud: solicitudesDespachadas) {
+			if (objSolicitud.getOperarioEncargado().getCedula() == poperario.getCedula()) {
+				lista += objSolicitud.toString();
+			}
+		}
+		return lista;
+	}
+	
+	/**
+	 * listarSolicAtendidasOperario
+	 * Retorna la lista de las solicitudes atendidas por el operario pasado
+	 * por parametro.
+	 * @return String lista de solicitudes atendidas por operario.
+	 */
+	public String listarSolicAtendidasOperario(Operario poperario) {
+		String lista = "";
+		
+		for (Solicitud objSolicitud: solicitudesAtendidas) {
+			if (objSolicitud.getOperarioEncargado().getCedula() == poperario.getCedula()) {
+				lista += objSolicitud.toString();
+			}
+		}
+		return lista;
 	}
 }

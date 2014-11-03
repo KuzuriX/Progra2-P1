@@ -7,12 +7,13 @@ import java.sql.Time;
  */
 public class Solicitud {
 	// Puede ser uno de tres estados: pendiente, despachada o atendida.
-	private String condicion;
-	private Maquina maquina;
+	private String condicionAtencion;
+	private String idMaquina;
 	private Date fechaAveria;
 	private Time horaAveria;
-	private int cantEnvasesProducidos;
-	private Molde molde;
+	private int numEnvasesProducidos;
+	private String tamano;
+	private String grosor;
 	private Operario operarioEncargado;
 	private String problema;
 	private String solucion;
@@ -22,50 +23,52 @@ public class Solicitud {
 	 * Constructor. Crear una solicitud de reparacion.
 	 * 
 	 */
-	public Solicitud(String pcondicion, Maquina pmaquina, Date pfechaAveria, Time phoraAveria, int pcantEnvases, Molde pmolde, String pproblema) {
-		setCondicion(pcondicion);
-		setMaquina(pmaquina);
+	public Solicitud(String pidMaquina, Date pfechaAveria, Time phoraAveria, int pcantEnvases, String ptamano, String pgrosor, String pproblema) {
+		// Cuando se crea una solicitud siempre tiene estado "pendiente".
+		setCondicionAtencion("pendiente");
+		setIdMaquina(pidMaquina);
 		setFechaAveria(pfechaAveria);
 		setHoraAveria(phoraAveria);
-		setCantEnvasesProducidos(pcantEnvases);
-		setMolde(pmolde);
+		setNumEnvasesProducidos(pcantEnvases);
+		setTamano(ptamano);
+		setGrosor(pgrosor);
 		setProblema(pproblema);
 	}
 	
 	/**
-	 * getCondicion
+	 * getCondicionAtencion
 	 * Retorna la condicion de la solicitud. Puede ser "pendiente", "despachada" o "atendida".
 	 * @return String condicion de la solicitud.
 	 */
-	private String getCondicion() {
-		return condicion;
+	private String getCondicionAtencion() {
+		return condicionAtencion;
 	}
 	
 	/**
-	 * setCondicion
+	 * setCondicionAtencion
 	 * Establece un valor para la condicion de la solicitud.
 	 * @param pcondicion condicion de la solicitud. Puede ser "pendiente", "despachada" o "atendida".
 	 */
-	private void setCondicion(String pcondicion) {
-		condicion = pcondicion;
+	public void setCondicionAtencion(String pcondicion) {
+		condicionAtencion = pcondicion;
 	}
 	
 	/**
 	 * getMaquina
-	 * Retorna la maquina averiada.
-	 * @return Maquina maquina averiada.
+	 * Retorna el identificador de la maquina averiada.
+	 * @return String identificador de la maquina averiada.
 	 */
-	private Maquina getMaquina() {
-		return maquina;
+	private String getIdMaquina() {
+		return idMaquina;
 	}
 	
 	/**
 	 * setMaquina
 	 * Establece la referencia a un objeto de tipo maquina.
-	 * @param Maquina maquina averiada.
+	 * @param pidMaquina identificador de la maquina averiada.
 	 */
-	private void setMaquina(Maquina pmaquina) {
-		maquina = pmaquina;
+	private void setIdMaquina(String pidMaquina) {
+		idMaquina = pidMaquina;
 	}
 	
 	/**
@@ -105,41 +108,61 @@ public class Solicitud {
 	}
 	
 	/**
-	 * getCantEnvasesProducidos
+	 * getNumEnvasesProducidos
 	 * Retorna la cantidad de envases producidos por la maquina desde la ultima
 	 * activacion.
 	 * @return int cantidad de envases producidos.
 	 */
-	private int getCantEnvasesProducidos() {
-		return cantEnvasesProducidos;
+	private int getNumEnvasesProducidos() {
+		return numEnvasesProducidos;
 	}
 	
 	/**
-	 * setCantEnvasesProducidos
+	 * setNumEnvasesProducidos
 	 * Establece un valor para la cantidad de envases producidos por la maquina
 	 * desde la ultima activacion.
-	 * @param pcantEnvases cantidad de envases.
+	 * @param pnumEnvases cantidad de envases.
 	 */
-	private void setCantEnvasesProducidos(int pcantEnvases) {
-		cantEnvasesProducidos = pcantEnvases;
+	private void setNumEnvasesProducidos(int pnumEnvases) {
+		numEnvasesProducidos = pnumEnvases;
 	}
 	
 	/**
-	 * getMolde
-	 * Retorna el molde utilizado por la maquina averiada.
-	 * @return Molde cantidad de envases producidos.
+	 * getTamano
+	 * Retorna el tamaño del envase utilizado por la maquina averiada.
+	 * @return String tamaño de envases producidos.
 	 */
-	private Molde getMolde() {
-		return molde;
+	private String getTamano() {
+		return tamano;
 	}
 	
 	/**
-	 * setMolde
-	 * Establece un valor el molde utilizado por la maquina averiada.
-	 * @param pmolde molde de la maquina averiada.
+	 * setTamano
+	 * Establece un valor para el tamaño de envases utilizado por la 
+	 * maquina averiada.
+	 * @param ptamano grosor del envase.
 	 */
-	private void setMolde(Molde pmolde) {
-		molde = pmolde;
+	private void setTamano(String ptamano) {
+		tamano = ptamano;
+	}
+	
+	/**
+	 * getGrosor
+	 * Retorna el grosor del envase utilizado por la maquina averiada.
+	 * @return String grosor de envases producidos.
+	 */
+	private String getGrosor() {
+		return grosor;
+	}
+	
+	/**
+	 * setGrosor
+	 * Establece un valor para el grosor de envases utilizado por la 
+	 * maquina averiada.
+	 * @param pgrosor grosor del envase.
+	 */
+	private void setGrosor(String pgrosor) {
+		grosor = pgrosor;
 	}
 	
 	/**
@@ -147,16 +170,16 @@ public class Solicitud {
 	 * Retorna el operario encargado de la reparacion de la maquina averiada.
 	 * @return Operario cantidad de envases producidos.
 	 */
-	private Operario getOperarioEncargado() {
+	public Operario getOperarioEncargado() {
 		return operarioEncargado;
 	}
 	
 	/**
-	 * setOperarioEncargado
+	 * asignarOperarioEncargado
 	 * Establece una referencia al operario encargado de la reparacion.
 	 * @param poperario operario que realiza la reparacion.
 	 */
-	private void setOperarioEncargado(Operario poperario) {
+	public void asignarOperarioEncargado(Operario poperario) {
 		operarioEncargado = poperario;
 	}
 	
@@ -194,5 +217,25 @@ public class Solicitud {
 	 */
 	private void setSolucion(String psolucion) {
 		solucion = psolucion;
+	}
+	
+	/**
+	 * toString
+	 * Retorna el estado de la solicitud.
+	 * @return String estado de los atributos de la solicitud.
+	 */
+	public String toString() {
+		String estado = "";
+		estado += "Condicion: " + getCondicionAtencion() + "\n" +
+				  "Maquina averiada: " + getIdMaquina() + "\n" + 
+				  "Fecha y hora de la averia: " + getFechaAveria() + " " + getHoraAveria() + "\n" +
+				  "Cantidad de envases producidos: " + getNumEnvasesProducidos() + "\n" + 
+				  "Tamaño: " + getTamano() + "\n" + 
+				  "Grosor: " + getGrosor() + "\n" +
+				  "Operario encargado: " + getOperarioEncargado().getNombre() + "\n" +
+				  "Problema: " + getProblema() + "\n" +
+				  "Solucion: " + getSolucion() + "\n";
+		
+		return estado;
 	}
 }

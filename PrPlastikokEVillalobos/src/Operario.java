@@ -5,7 +5,7 @@
 public class Operario {
 	private String cedula;
 	private String nombre;
-	private static int cantReparaciones = 0;
+	private int cantMaquinasRep;
 	
 	/**
 	 * Operario
@@ -23,7 +23,7 @@ public class Operario {
 	 * Retorna el valor del atributo cedula del operario.
 	 * @return String cedula de la operario.
 	 */
-	private String getCedula() {
+	public String getCedula() {
 		return cedula;
 	}
 	
@@ -41,7 +41,7 @@ public class Operario {
 	 * Retorna el valor del atributo nombre del operario.
 	 * @return String nombre de la operario.
 	 */
-	private String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 	
@@ -55,11 +55,20 @@ public class Operario {
 	}
 	
 	/**
-	 * incrementarCantReparaciones
-	 * Incrementa en uno el total de máquinas reparadas por el operario.
+	 * getCantMaquinasRep
+	 * Retorna la cantidad de maquinas reparadas por el operario.
+	 * @return int total de maquinas reparadas.
 	 */
-	private void incrementarCantReparaciones() {
-		cantReparaciones++;
+	private int getCantMaquinasRep() {
+		return cantMaquinasRep;
+	}
+	
+	/**
+	 * incrementarCantMaquinasRep
+	 * Incrementa en uno la cantidad de máquinas reparadas por el operario.
+	 */
+	private void incrementarCantMaquinasRep() {
+		cantMaquinasRep++;
 	} 
 	
 	/**
@@ -72,6 +81,19 @@ public class Operario {
 		
 		// Una vez finalizada la reparacion, se debe incrementar en uno
 		// el total de maquinas reparadas.
-		incrementarCantReparaciones();
+		incrementarCantMaquinasRep();
+	}
+	
+	/**
+	 * toString
+	 * Retorna el estado del objeto Operario.
+	 * @return String estado del objeto Operario.
+	 */
+	public String toString() {
+		String estado = "Cedula: " + getCedula() + "\n" +
+						"Nombre: " +  getNombre() + "\n" +
+						"Maquinas reparadas: " + getCantMaquinasRep();
+		
+		return estado;
 	}
 }
