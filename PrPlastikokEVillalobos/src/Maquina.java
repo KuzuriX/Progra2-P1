@@ -2,6 +2,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Maquina
+ * Maquina productora de envases.
  * @author Miguel Garcia
  */
 public class Maquina {
@@ -31,6 +32,9 @@ public class Maquina {
 	 * Constructor. Recibe el centro de control al que debe reportar averias.
 	 * @param pobjCentroControl Centro de control al que la maquina debe reportar
 	 * 						    averias.
+	 * @param pmarca			Marca de la maquina.
+	 * @param pmodelo 			Modelo de la maquina.
+	 * @param pannoFabricacion	Ano de fabricacion de la maquina.
 	 */
 	public Maquina(CentroControl pobjCentroControl, String pmarca, String pmodelo, String pannoFabricacion){
 		setCentroControl(pobjCentroControl);
@@ -342,6 +346,7 @@ public class Maquina {
 	/**
 	 * iniciarProduccion
 	 * Iniciar la produccion de envases.
+	 * @return String averia, si hubo.
 	 */
 	public String iniciarProduccion() {	
 		double materiaPrima = getCantMateriaPrima();

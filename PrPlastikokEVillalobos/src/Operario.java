@@ -1,5 +1,6 @@
 /**
  * Operario
+ * Persona que se encarga de reparar averias en maquinas.
  * @author Elizabeth Villalobos
  */
 public class Operario {

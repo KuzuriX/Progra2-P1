@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 /**
  * Centro de control
+ * Administra las solicitudes de reparacion de las maquinas.
  * @author Elizabeth Villalobos
  */
 public class CentroControl {
@@ -17,6 +18,7 @@ public class CentroControl {
 	 * 	1. Crea un nuevo operario.
 	 *  2. Inicializa la lista de solicitudes despachadas.
 	 *  3. Inicializa la lista de solicitudes atendidas.
+	 *  @param pfabrica Fabrica a la que pertenece el centro de control.
 	 */
 	public CentroControl(Fabrica pfabrica) {
 		listaOperarios = new ArrayList<Operario>();
@@ -37,6 +39,7 @@ public class CentroControl {
 	/**
 	 * obtenerOperario
 	 * Retorna el operario que se encuentre en una posicion especifica del array.
+	 * @param pposicion posicion en la lista donde se encuentra el operario.
 	 * @return Operario operario del centro de control
 	 */
 	public Operario obtenerOperario(int pposicion) {
@@ -173,6 +176,7 @@ public class CentroControl {
 	 * listarSolicDespachadasOperario
 	 * Retorna la lista de las solicitudes despachadas a el operario pasado
 	 * por parametro.
+	 * @param poperario Operario de quien se quiere obtener la lista de solicitudes
 	 * @return String lista de solicitudes despachadas por operario.
 	 */
 	public String listarSolicDespachadasOperario(Operario poperario) {
@@ -190,6 +194,7 @@ public class CentroControl {
 	 * listarSolicAtendidasOperario
 	 * Retorna la lista de las solicitudes atendidas por el operario pasado
 	 * por parametro.
+	 * @param poperario Operario de quien se quiere obtener la lista de solicitudes
 	 * @return String lista de solicitudes atendidas por operario.
 	 */
 	public String listarSolicAtendidasOperario(Operario poperario) {

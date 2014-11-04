@@ -2,6 +2,8 @@ import java.text.SimpleDateFormat;
 
 /**
  * Solicitud de reparación
+ * Contiene la informacion necesaria para que un operario pueda
+ * reparar una maquina.
  * @author Elizabeth Villalobos
  */
 public class Solicitud {

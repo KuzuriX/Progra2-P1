@@ -1,4 +1,10 @@
 
+/**
+ * Gamma
+ * Maquina especial que reduce su consumo de materia prima cuando
+ * alcanza cierto nivel.
+ * @author Miguel Garcia
+ */
 public class Gamma extends Maquina {
 	private boolean modoGamma;
 	private double consumoGamma;

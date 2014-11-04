@@ -2,10 +2,11 @@ import java.util.ArrayList;
 
 /**
  * Fabrica
+ * Fabrica de maquinas productoras de envases de plastico.
  * @author Miguel García
  */
 public class Fabrica {
-	private ArrayList<Maquina> listaMaquinas = new ArrayList<>();
+	private ArrayList<Maquina> listaMaquinas = new ArrayList<Maquina>();
 	private CentroControl objCentroControl;
 	
 	/**
@@ -39,7 +40,7 @@ public class Fabrica {
 	/**
 	 * getMaquinas
 	 * Retorna la lista de máquinas que la fábrica tiene disponible.
-	 * @return ArrayList<Maquina> lista de máquinas que tiene la fábrica.
+	 * @return ArrayList lista de máquinas que tiene la fábrica.
 	 */
 	public ArrayList<Maquina> getMaquinas() {
 		return listaMaquinas;
@@ -61,6 +62,16 @@ public class Fabrica {
 	/**
 	 * crearMaquina
 	 * Método que permite a clientes crear nuevas máquinas en la fábrica.
+	 * @param
+	 */
+	
+	/**
+	 * crearMaquina
+	 * Método que permite a clientes crear nuevas máquinas en la fábrica.
+	 * @param ptipoMaquina tipo de maquina, puede ser 1, maquina regular o 2 maquina gamma.
+	 * @param pmarca marca de la maquina.
+	 * @param pmodelo modelo de la maquina.
+	 * @param pannoFabricacion Anno de fabricacion de la maquina.
 	 */
 	public void crearMaquina(Integer ptipoMaquina ,String pmarca, String pmodelo, String pannoFabricacion) {
 		agregarMaquina(ptipoMaquina, pmarca, pmodelo, pannoFabricacion);

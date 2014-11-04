@@ -1,6 +1,7 @@
 
 /**
  * Detector
+ * Detecta averias en las maquinas y las reporta.
  * @author Elizabeth Villalobos
  */
 public class Detector {
@@ -10,6 +11,7 @@ public class Detector {
 	/**
 	 * Detector.
 	 * Constructor. Detecta fallas en la máquina productora de envases.
+	 * @param pmaquina Maquina a la que esta asociado el detector.
 	 */
 	public Detector(Maquina pmaquina) {
 		setTipoAveria("");
