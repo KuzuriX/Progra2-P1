@@ -143,11 +143,20 @@ public class Maquina {
 	}
 	
 	/**
+	 * setCantEnvasesProd
+	 * Establece la cantidad de envases producidos 
+	 * @param pcantEnvasesProd	cantidad de envases producidos.
+	 */
+	public void setCantEnvasesProd(int pcantEnvasesProd) {
+		cantEnvasesProd = pcantEnvasesProd;
+	}
+	
+	/**
 	 * incrementarCantEnvasesProd
 	 * Incrementa en uno la cantidad de envases producidos por la mÃ¡quina.
 	 */
 	protected void incrementarCantEnvasesProd() {
-		cantEnvasesProd ++;
+		setCantEnvasesProd(getCantEnvasesProd()+1);
 	}
 	
 	/**
@@ -331,7 +340,8 @@ public class Maquina {
 	 */
 	public void activarMaquina() {
 		// Cuando se activa la mÃ¡quina se debe resetear el contador de envases.
-		setNumEnvases(0);
+		//setNumEnvases(0);
+		
 		setActivo(true);
 	}
 	
@@ -351,41 +361,48 @@ public class Maquina {
 	public String iniciarProduccion() {	
 		double materiaPrima = getCantMateriaPrima();
 		String averia = "";
-		
-		if(modoOperacion == 'C'){
-			while (getCantMateriaPrima() > 0 && isActivo()) {
-				materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
-				setCantMateriaPrima(materiaPrima);
-				
-				// Se ha producido un envase mas.
-				incrementarCantEnvasesProd();
-				
-				// Llamar al detector cada vez que se produce un envase.
-				averia = detectorFallas.verificarAveria();
-				if (averia != "") {
-					desactivarMaquina();
-					reportarAveria(averia);
+		String msj = "";
+		if(isActivo()){
+			if(modoOperacion == 'C'){
+				while (getCantMateriaPrima() > 0) {
+					materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
+					setCantMateriaPrima(materiaPrima);
+					
+					// Se ha producido un envase mas.
+					incrementarCantEnvasesProd();
+					
+					// Llamar al detector cada vez que se produce un envase.
+					averia = detectorFallas.verificarAveria();
+					if (averia != "") {
+						desactivarMaquina();
+						reportarAveria(averia);
+						msj = averia;
+					}
+				}
+			}else{
+				while (numEnvases > cantEnvasesProd) {
+					materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
+					setCantMateriaPrima(materiaPrima);
+					
+					// Se ha producido un envase mas.
+					incrementarCantEnvasesProd();
+					
+					// Llamar al detector cada vez que se produce un envase.
+					averia = detectorFallas.verificarAveria();
+					if (averia != "") {
+						desactivarMaquina();
+						reportarAveria(averia);
+						msj = averia;
+					}
+					
 				}
 			}
+			msj += "Se produjeron "+getCantEnvasesProd()+" envases \n";
+			msj += "Quedan "+getCantMateriaPrima()+" de materia prima";
 		}else{
-			while (numEnvases > cantEnvasesProd) {
-				materiaPrima = materiaPrima - getMoldeEnvases().obtenerPorcMateria();
-				setCantMateriaPrima(materiaPrima);
-				
-				// Se ha producido un envase mas.
-				incrementarCantEnvasesProd();
-				
-				// Llamar al detector cada vez que se produce un envase.
-				averia = detectorFallas.verificarAveria();
-				if (averia != "") {
-					desactivarMaquina();
-					reportarAveria(averia);
-				}
-				
-			}
+			msj = "La maquina se encuentra desactivada";
 		}
-		String msj = "Se produjeron "+getCantEnvasesProd()+" envases \n";
-		msj += "Quedan "+getCantMateriaPrima()+" de materia prima";
+		
 		
 		return msj;
 		
